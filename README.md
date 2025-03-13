@@ -26,7 +26,7 @@
    - Kelas C: <br>
      Jam ke-5 di Gedung B 4.12
    - Kelas D: <br>
-     ...
+     Jam ke-7 di Gedung B 4.12
 
 2. Soal nilai bisa dibicarakan, yang penting tetap mengerjakan tugas dan tidak tipsen
 3. Diperbolehkan menggunakan GPT/Gemini/dll selama tidak hanya copas
@@ -45,5 +45,5 @@
   1. [Rizki Maulana](https://github.com/rizkimaulana32)
   2. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
 - Kelas D
-  1. ...
-  2. ...
+  1. [Muhamamd Ryan Fikri Fakhrezi](https://github.com/yanfiq)
+  2. [M. Bagas Abidawaqli](https://github.com/abqli484)
