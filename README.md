@@ -1,23 +1,49 @@
 ## Modul Praktikum Pengembangan Aplikasi Bergerak 2024/2025 Genap
 
-### Materi
+### Daftar Pertemuan dan Materi
 
-1. Pengenalan Kotlin 1
+1. [Pengenalan Kotlin 1](./week-01/materi.md)
 2. Pengenalan Kotlin 2
 3. Pengenalan Android Studio dan Jetpack Compose
 4. Basic UI Compose
 5. Layouting dan Styling
-6. LazyColumn & Composable
-7. Compose Navigation
-8. Dependency Injection dan App Architecture
-9. HTTP Request
-10. Data Persistence 1
-11. Data Persistence 2
-12. Work Manager
+6. LazyColumn dan Composable
+7. Compose Navigation dan View Models
+8. Responsi 1
+9. Dependency Injection dan App Architecture
+10. HTTP Request
+11. Data Persistence 1
+12. Data Persistence 2
+13. Work Manager
+14. Responsi 2
+
+### Kontrak Praktikum
+
+1. Waktu praktikum:
+
+   - Kelas A dan B: <br>
+     Jam ke-4 di UPT TIK Lantai 4
+   - Kelas C: <br>
+     Jam ke-5 di Gedung B 4.12
+   - Kelas D: <br>
+     ...
+
+2. Soal nilai bisa dibicarakan, yang penting tetap mengerjakan tugas dan tidak tipsen
+3. Diperbolehkan menggunakan GPT/Gemini/dll selama tidak hanya copas
+4. Dilarang copas codingan milik teman, apabila terdeteksi melakukan plagiarisme akan mendapatkan pengurangan poin sebesar 25-40 poin
+5. Keterlambatan pengumpulan tugas akan mendapatkan pengurangan poin sebesar 1-2 poin per hari
 
 ### Asisten Praktikum
 
-- Rizal Dwi Anggoro
-- Rafly Amanta Haryanto
-- Retno Pinka Pratiwi
-- Salsa Rizki Saputri
+- Kelas A
+  1. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
+  2. [Rafly Amanta Haryanto](https://github.com/raflyamanta)
+- Kelas B
+  1. Retno Pinka Pratiwi
+  2. Salsa Rizki Saputri
+- Kelas C
+  1. [Rizki Maulana](https://github.com/rizkimaulana32)
+  2. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
+- Kelas D
+  1. ...
+  2. ...
