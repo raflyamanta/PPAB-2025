@@ -3,7 +3,7 @@
 ### Daftar Pertemuan dan Materi
 
 1. [Pengenalan Kotlin 1](./week-01/materi.md)
-2. Pengenalan Kotlin 2
+2. [Pengenalan Kotlin 2](./week-02/materi.md)
 3. Pengenalan Android Studio dan Jetpack Compose
 4. Basic UI Compose
 5. Layouting dan Styling
