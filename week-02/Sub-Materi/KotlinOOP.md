@@ -120,7 +120,7 @@ lateinit var nim: String
 
 fun main(){
 
-    nim = "M0521062"
+    nim = "L0122158"
 
     println(nim)
 
