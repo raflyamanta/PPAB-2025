@@ -83,6 +83,11 @@ fun main(){
     var myInt_2 = 1..5 step 2   // 1 3 5
     var myInt_3 = 1.rangeTo(7)  // 1 2 3 4 5 6 7
 
+    myInt.forEach { print("$it ") }
+    println()  
+    myInt_2.forEach { print("$it ") }
+    println() 
+    myInt_3.forEach { print("$it ") }
 }
 ```
 
