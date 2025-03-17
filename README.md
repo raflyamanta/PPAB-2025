@@ -39,8 +39,8 @@
   1. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
   2. [Rafly Amanta Haryanto](https://github.com/raflyamanta)
 - Kelas B
-  1. Retno Pinka Pratiwi
-  2. Salsa Rizki Saputri
+  1. [Retno Pinka Pratiwi](https://github.com/enopinka)
+  2. [Salsa Rizki Saputri](https://github.com/salsarizkii)
 - Kelas C
   1. [Rizki Maulana](https://github.com/rizkimaulana32)
   2. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
