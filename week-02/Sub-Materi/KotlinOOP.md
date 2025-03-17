@@ -216,7 +216,7 @@ class Book(name: String, year: Int){
 
     init {
         this.name = name
-        this.year = if(year < 0) 2025 else year
+        this.year = year
         this.isSelfPublished = false
     }
 
