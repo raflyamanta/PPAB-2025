@@ -147,7 +147,7 @@ Berkebalikan dengan _lateinit_, penggunaan _lazy property_ harus disandingkan de
 
 ```kotlin
 val angkatan : String by lazy { 
-    "2022"
+    "2023"
 }
 
 fun main(){
@@ -157,7 +157,7 @@ fun main(){
 }
 
 // Output
-// 2022
+// 2023
 ```
 
 ## Primary Constructor
