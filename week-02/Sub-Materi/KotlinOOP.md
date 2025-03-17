@@ -127,7 +127,7 @@ fun main(){
 }
 
 // Output
-// M0521062
+// L0122158
 ```
 
 Kita juga dapat melakukan pengecekan apakah variabel sudah terinisialisasi ataukah belum seperti pada kode di bawah ini :
