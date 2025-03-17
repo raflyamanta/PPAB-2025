@@ -216,7 +216,7 @@ class Book(name: String, year: Int){
 
     init {
         this.name = name
-        this.year = if(year < 0) 2021 else year
+        this.year = if(year < 0) 2025 else year
         this.isSelfPublished = false
     }
 
@@ -228,8 +228,8 @@ class Book(name: String, year: Int){
 
 fun main() {
 
-    var book1 = Book(name = "Kotlin Programming", year = 2020)
-    var book2 = Book(name = "Android Development", year = 2022, isSelfPublished = true)
+    var book1 = Book(name = "Kotlin Programming", year = 2025)
+    var book2 = Book(name = "Android Development", year = 2025, isSelfPublished = true)
 
     println("Book 1 : ${book1.name} - ${book1.year} - ${book1.isSelfPublished}")
     println("Book 2 : ${book2.name} - ${book2.year} - ${book2.isSelfPublished}")
@@ -237,8 +237,8 @@ fun main() {
 }
 
 // Output
-// Book 1 : Kotlin Programming - 2020 - false
-// Book 2 : Android Development - 2022 - true
+// Book 1 : Kotlin Programming - 2025 - false
+// Book 2 : Android Development - 2025 - true
 ```
 
 Jika kita tidak membuat sebuah _constructor_ secara manual, maka Kotlin akan secara otomatis membuat sebuah **_default constructor_** pada kelas tersebut.
