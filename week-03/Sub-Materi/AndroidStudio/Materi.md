@@ -70,6 +70,6 @@ To use Android Studio effectively, ensure your system meets the following minimu
 ## Conclusion
 Android Studio is an essential tool for developing Android applications. Mastering its features will help streamline the development process and make your app-building experience more productive.
 
-[BACK](../Materi.md) 
+[BACK](../../Materi.md) 
 
 
