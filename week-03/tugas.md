@@ -17,7 +17,7 @@
     ![alt text](kerangka-interface.png)
 
 ### Demo Final Aplikasi
-![alt text](demo.mp4)
+[LIHAT DI SINI](demo.mp4)
 
 ### Tips and Tricks
 1. Simpan gambar pada directory **res/drawable** dan jangan lupa untuk menghindari **penulisan string** secara **hardcode** pada file xml.
