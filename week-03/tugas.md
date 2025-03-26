@@ -55,7 +55,7 @@
 3. Asisten akan menggunakan emulator dengan SDK level 30, maka pastikan saat build aplikasi, **gunakanlah Minimum SDK <= 30**
 
 ### Detail Laporan Praktikum
-#### Laporan berisi screenshot source code dan tampilan user interface beserta penjelasannya disertai dengan kesimpulan. 
+#### Laporan berisi screenshot source code penggunaan materi praktikum, tampilan user interface beserta penjelasan, dan diakhiri dengan kesimpulan. 
     
 Tugas dikumpulkan dalam bentuk **.ZIP** dengan format nama **PPAB-03_NIM_Nama.zip yang berisi source code dari aplikasi** dan **.PDF dengan format nama PPAB-03_NIM_Nama.pdf yang berisi laporan praktikum**. Perlu diingat bahwa **file .zip tidak berisikan file pdf, murni berisi source code saja** dan gunakan **cara .zip sesuai yang diajarkan oleh asisten**.
 
