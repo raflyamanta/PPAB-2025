@@ -4,7 +4,7 @@
 
 1. [Pengenalan Kotlin 1](./week-01/materi.md)
 2. [Pengenalan Kotlin 2](./week-02/materi.md)
-3. Pengenalan Android Studio, Jetpack Compose, dan Intent
+3. [Pengenalan Android Studio, Jetpack Compose, dan Intent](./week-03/materi.md)
 4. Basic UI Compose
 5. Layouting dan Styling
 6. LazyColumn dan Composable
