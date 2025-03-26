@@ -19,36 +19,6 @@
 ### Contoh Final Aplikasi
 [KLIK](https://drive.google.com/file/d/1G-5UYgLbITo60RKHTyP0ycap_12mn0LD/view?usp=drive_link)
 
-### Tips and Tricks
-1. Simpan gambar pada directory **res/drawable** dan jangan lupa untuk menghindari **penulisan string** secara **hardcode** pada file xml.
-2. Untuk membuat rounded pada foto dapat menggunakan library Glide yang dapat diakses pada [Github berikut ini](https://github.com/bumptech/glide).
-
-    Tambahkan Library Glide pada build.gradles.kts(modules) seperti berikut ini.
-    ```kotlin
-    dependencies {
-
-        implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.appcompat)
-        implementation(libs.material)
-        ...
-
-        // Library yang ditambahkan dengan cara lama
-        implementation("de.hdodenhof:circleimageview:3.1.0")
-    }
-    ```
-    Berikut contoh penggunaan sederhana pada file xml-nya.
-    ```xml
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="32dp"
-            android:src="@drawable/hitori"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp" />
-    ```
-
 ### Ketentuan Source Code Aplikasi
 1. Menggunakan Android Studio
 2. Menggunakan bahasa pemrograman Kotlin
