@@ -17,7 +17,7 @@
     ![alt text](kerangka-interface.png)
 
 ### Demo Final Aplikasi
-[LIHAT DI SINI](demo.mp4)
+[LIHAT DI SINI](https://drive.google.com/file/d/1G-5UYgLbITo60RKHTyP0ycap_12mn0LD/view?usp=drive_link)
 
 ### Tips and Tricks
 1. Simpan gambar pada directory **res/drawable** dan jangan lupa untuk menghindari **penulisan string** secara **hardcode** pada file xml.
