@@ -65,7 +65,9 @@ Tugas dikumpulkan dalam bentuk **.ZIP** dengan format nama **PPAB-03_NIM_Nama.zi
     xx = week praktikum
 
 [Template Laporan Praktikum](https://docs.google.com/document/d/1zh9XS41ARJFT3TTgXNUspGXTsvpG097l/edit?usp=drive_link&ouid=102536223942160379481&rtpof=true&sd=true)
+
 [Tutorial Export Zip Android Studio](https://youtu.be/4r2czHHh3a0?si=J_6iTJ2qjnmQhrza)
+
 ### Penilaian didasarkan pada: 
     1. Aplikasi Bebas dari error ketika dijalankan secara normal (10%)
     2. Relevansi source code dengan instruksi di atas (50%) 
