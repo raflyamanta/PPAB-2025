@@ -1,6 +1,6 @@
 # Android For Beginner 1
 
-Pada pertemuan minggu ini, kita akan membahas mengenai berikut ini.
+Pada pertemuan minggu ini, kita akan membahas materi berikut ini.
 
 1. [Android Studio](Sub-Materi/AndroidStudio/Materi.md)
 2. [Jetpack Compose](Sub-Materi/JetpackCompose/Materi.md) 
