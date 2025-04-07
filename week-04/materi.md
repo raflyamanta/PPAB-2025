@@ -8,20 +8,13 @@ UI Slicing is the process of converting a visual UI design (usually from tools l
 
 Jetpack Compose is Android's modern toolkit for building native UI. It simplifies and accelerates UI development on Android.
 
-### ✨ Benefits:
-
-- Declarative code
-- Less boilerplate
-- Better performance for dynamic UIs
-- Easy to preview and iterate
-
 ## 3. Tools Needed
 
 - Android Studio (latest version)
 - Jetpack Compose setup in your project
 - Dribbble (or Figma) for design references
 
-## 4. Understanding Dribbble as a Design Reference
+## 4. Dribbble
 
 Dribbble is a platform where designers showcase UI/UX concepts. You can search for Android UI ideas and pick one to recreate using Compose. When choosing:
 
