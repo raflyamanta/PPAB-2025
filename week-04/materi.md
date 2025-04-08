@@ -1,11 +1,10 @@
 # 📚 Android UI Components in Jetpack Compose
 
-## 1. Jetpack Compose 
 Jetpack Compose is Android’s modern toolkit for building native UI. It provides a rich set of components that follow a declarative programming model.
 
 ---
 
-## 2. Basic UI Components
+## 1. Basic UI Components
 
 ### 📝 Text
 Used to display text.
@@ -50,7 +49,7 @@ Card(elevation = CardDefaults.cardElevation(8.dp)) {
 
 ---
 
-## 3. Layout Containers
+## 2. Layout Containers
 
 ### 🔲 Column
 Vertical arrangement.
@@ -87,7 +86,7 @@ Spacer(modifier = Modifier.height(16.dp))
 
 ---
 
-## 4. Advanced UI Components
+## 3. Advanced UI Components
 
 ### 🧭 Scaffold
 Base layout structure (top bar, bottom bar, etc).
@@ -160,7 +159,7 @@ Slider(
 
 ---
 
-## 5. Modifiers
+## 4. Modifiers
 Modifiers are used to decorate or add behavior to UI components.
 ```kotlin
 Text(
@@ -174,7 +173,7 @@ Text(
 
 ---
 
-## 6. Preview
+## 5. Preview
 Use `@Preview` to see the composable in Android Studio without running the app.
 ```kotlin
 @Preview(showBackground = true)
@@ -186,14 +185,14 @@ fun PreviewGreeting() {
 
 ---
 
-## 7. Conclusion
+## 6. Conclusion
 Mastering UI components in Jetpack Compose allows you to build beautiful, responsive, and modern Android interfaces with less code and more flexibility.
 
 Practice using these components by building small UIs and gradually combining them into more complex layouts.
 
 ---
 
-## 8. Resources
+## 7. Resources
 - [Jetpack Compose Docs](https://developer.android.com/jetpack/compose)
 - [Compose Samples](https://github.com/android/compose-samples)
 - [Material 3 Compose](https://developer.android.com/jetpack/compose/material3)
