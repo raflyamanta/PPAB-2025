@@ -1,6 +1,6 @@
 # 📚 Android UI Components in Jetpack Compose
 
-## 1. Introduction to Jetpack Compose UI Components
+## 1. Jetpack Compose 
 Jetpack Compose is Android’s modern toolkit for building native UI. It provides a rich set of components that follow a declarative programming model.
 
 ---
