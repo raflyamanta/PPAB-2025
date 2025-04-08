@@ -122,7 +122,7 @@ LazyRow {
 ```
 
 ### ✅ Checkbox
-
+For boolean options.
 ```kotlin
 Checkbox(
     checked = isChecked,
@@ -131,6 +131,7 @@ Checkbox(
 ```
 
 ### 🔘 RadioButton
+For single choice from a group.
 ```kotlin
 RadioButton(
     selected = isSelected,
@@ -139,6 +140,7 @@ RadioButton(
 ```
 
 ### 🧩 Switch
+On/off toggle switch.
 ```kotlin
 Switch(
     checked = isToggled,
@@ -147,6 +149,7 @@ Switch(
 ```
 
 ### 🔢 Slider
+Select a value from range.
 ```kotlin
 Slider(
     value = sliderValue,
