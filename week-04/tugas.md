@@ -3,10 +3,9 @@ Buatlah **sebuah aplikasi Android** dengan mengimplementasikan **UI Components**
 
 ## Ketentuan Tugas:
 
-1. **Carilah contoh desain User Interface (UI)** dari referensi manapun (misalnya: Dribbble, Behance, Pinterest, atau sumber terpercaya lainnya).
+1. **Carilah contoh desain User Interface (UI)** dari referensi manapun (misalnya: Dribbble, Behance, Pinterest, atau sumber lainnya).
 2. **Clone desain tersebut** menggunakan metode *UI slicing* dengan **Jetpack Compose**.
-3. Pastikan hasil implementasi menyerupai desain aslinya sebisa mungkin.
-4. Tidak perlu mengimplementasikan fitur atau fungsionalitas dari desain, cukup fokus pada **realisasi antarmuka pengguna (UI)**.
+3. Tidak perlu mengimplementasikan fitur atau fungsionalitas dari desain, cukup fokus pada **realisasi antarmuka pengguna (UI)**.
 
 ---
 
