@@ -7,13 +7,13 @@ Buatlah aplikasi Android dengan mengimplementasikan **UI Components** seperti ya
 2. Clone desain tersebut menggunakan metode *UI slicing* dengan *Jetpack Compose*.
 3. Tidak perlu mengimplementasikan fitur atau fungsionalitas dari desain, cukup fokus pada realisasi antarmuka pengguna (UI).
 
-### Ketentuan Source Code Aplikasi
+## Ketentuan Source Code Aplikasi
 1. Menggunakan Android Studio
 2. Menggunakan bahasa pemrograman Kotlin
 3. Asisten akan menggunakan emulator dengan SDK level 30, maka pastikan saat build aplikasi, **gunakanlah Minimum SDK <= 30**
 
-### Detail Laporan Praktikum
-#### Laporan berisi screenshot source code penggunaan materi praktikum, tampilan user interface beserta penjelasan, dan diakhiri dengan kesimpulan. 
+## Detail Laporan Praktikum
+### Laporan berisi screenshot source code penggunaan materi praktikum, tampilan user interface beserta penjelasan, dan diakhiri dengan kesimpulan. 
     
 Tugas dikumpulkan dalam bentuk **.ZIP** dengan format nama **PPAB-04_NIM_Nama.zip yang berisi source code dari aplikasi** dan **.PDF dengan format nama PPAB-04_NIM_Nama.pdf yang berisi laporan praktikum**. Perlu diingat bahwa **file .zip tidak berisikan file pdf, murni berisi source code saja** dan gunakan **cara .zip sesuai yang diajarkan oleh asisten**.
 
