@@ -7,8 +7,6 @@ Buatlah aplikasi Android dengan mengimplementasikan **UI Components** seperti ya
 2. Clone desain tersebut menggunakan metode *UI slicing* dengan *Jetpack Compose*.
 3. Tidak perlu mengimplementasikan fitur atau fungsionalitas dari desain, cukup fokus pada realisasi antarmuka pengguna (UI).
 
----
-
 ### Ketentuan Source Code Aplikasi
 1. Menggunakan Android Studio
 2. Menggunakan bahasa pemrograman Kotlin
