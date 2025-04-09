@@ -1,5 +1,5 @@
 # Tugas  Praktikum PAB (Week 4)
-### Buatlah **sebuah aplikasi Android** dengan mengimplementasikan **UI Components** seperti yang ada pada materi praktikum.
+Buatlah **sebuah aplikasi Android** dengan mengimplementasikan **UI Components** seperti yang ada pada materi praktikum!
 
 ## Ketentuan Tugas:
 
