@@ -356,7 +356,7 @@ createVerticalChain(text1, text2, chainStyle = ChainStyle.Packed)
 
 ---
 
-### 🧩 `ChainStyle` – Gaya Distribusi
+###  `ChainStyle` – Gaya Distribusi
 
 `ConstraintLayout` menyediakan beberapa gaya distribusi elemen di dalam chain:
 
@@ -377,8 +377,7 @@ Packed:       |   ABC     |
 ```
 
 ---
-
-### ⚙️ Contoh Implementasi
+###  Contoh Implementasi
 
 ```kotlin
 @Composable
