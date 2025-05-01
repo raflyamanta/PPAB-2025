@@ -336,4 +336,5 @@ class MainActivity : ComponentActivity() {
 ```
 
 Berikut adalah hasil akhir ketika aplikasi dijalankan
+
 ![result](/week-06/images/result.gif)
