@@ -7,7 +7,7 @@ Buatlah aplikasi Android dengan mengimplementasikan **UI Components 3: Lazy Layo
 1. Carilah contoh desain User Interface (UI) dari referensi manapun (misalnya: Dribbble, Behance, Pinterest, atau sumber lainnya).
 2. Clone desain tersebut menggunakan metode _UI slicing_ dengan _Jetpack Compose_, pastikan desain tersebut mengandung komponen Lazy Layout.
 3. Tidak perlu mengimplementasikan fitur atau fungsionalitas dari desain, cukup fokus pada realisasi antarmuka pengguna (UI).
-4. Boleh menggunakan desain yang digunakan untuk tugas minggu lalu, namun **Tambahkan komponen Lazy Layout** seperti yang telah diajarkan oleh asisten praktikum.
+4. Boleh menggunakan desain yang digunakan untuk tugas minggu lalu, namun **tambahkan komponen Lazy Layout** seperti yang telah diajarkan oleh asisten praktikum.
 
 ## Ketentuan Source Code Aplikasi
 
