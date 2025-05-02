@@ -2,12 +2,12 @@
 
 ### Daftar Pertemuan dan Materi
 
-1. [Pengenalan Kotlin 1](./week-01/materi.md)
-2. [Pengenalan Kotlin 2](./week-02/materi.md)
-3. [Pengenalan Android Studio, Jetpack Compose, dan Intent](./week-03/materi.md)
-4. Basic UI Compose
-5. Layouting dan Styling
-6. LazyColumn dan Composable
+1. [Pengenalan Kotlin 1](./week-01/materi.md)  
+2. [Pengenalan Kotlin 2](./week-02/materi.md)  
+3. [Pengenalan Android Studio, Jetpack Compose, dan Intent](./week-03/materi.md)  
+4. [Basic UI Compose](./week-04/materi.md)  
+5. [Layouting dan Styling](./week-05/materi.md)  
+6. [LazyColumn dan Composable](./week-06/materi.md)
 7. Compose Navigation dan View Models
 8. Responsi 1
 9. Dependency Injection dan App Architecture
