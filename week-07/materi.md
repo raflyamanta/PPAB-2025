@@ -4,4 +4,4 @@ Pada pertemuan minggu ini, kita akan membahas materi penting yang perlu dipahami
 
 1. [State](sub-materi/state.md)
 2. [ViewModel](sub-materi/viewmodel.md)
-3. [Navigation](#navigation)
+3. [Navigation](sub-materi/navigation.md)
