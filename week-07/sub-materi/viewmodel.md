@@ -165,7 +165,7 @@ fun ArticleItem(article: Article) {
 
 Berikut Hasilnya: 
 
-<img src="/week-07/img/v1.png" alt="v1" width="50%"/>
+<img src="/week-07/img/v1.png" alt="v1" width="300"/>
 
 ---
 
