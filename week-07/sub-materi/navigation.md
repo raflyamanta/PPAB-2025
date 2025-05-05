@@ -97,13 +97,11 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     ```
 
 5. **Mengirim Data Antar Layar**  
-    Anda dapat mengirim data antar layar menggunakan argumen. Ketika kamu membuat destinasi dengan composable, `NavBackStackEntry` tersedia sebagai parameter. Contoh:
+    Anda dapat mengirim data antar layar menggunakan argumen. Ketika kamu membuat destinasi dengan composable, `NavBackStackEntry` tersedia sebagai parameter dan kita bisa menggunakanya untuk membaca argumen. Contoh:
     ```kotlin
     composable("Profile/{name}") { backStackEntry ->
         ProfileScreen(
-            onNavigateToFriendsList = {
-                mainNavController.navigate("FriendsList")
-            },
+            onNavigateToFriendsList = { /*...*/ },
             name = backStackEntry.arguments!!.getString("name")!!
         )
     }
@@ -212,6 +210,6 @@ Pada implementasi sebelumnya, kita menggunakan string untuk mendefinisikan route
     }
     ```
 
-Materi selengkapnya dapat dikulik sendiri melalui URL berikut:
-https://developer.android.com/guide/navigation
-https://developer.android.com/develop/ui/compose/navigation
+Materi selengkapnya dapat dikulik sendiri melalui URL berikut:  
+https://developer.android.com/guide/navigation  
+https://developer.android.com/develop/ui/compose/navigation  
