@@ -59,7 +59,7 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     \
     Pemanggilan fungsi NavHost dilakukan dengan mengisi parameter navController dengan NavController yang dibuat sebelumnya dan startDestination dengan route yang akan digunakan sebagai destinasi awal. Route disini adalah identifier unik untuk setiap destinasi.
     ```kotlin
-    NavHost(navController = mainNavController, startDestination = "Profile", modifier = modifier) {
+    NavHost(navController = mainNavController, startDestination = "FriendsList", modifier = modifier) {
         composable("Profile") { backStackEntry ->
             ProfileScreen(
                 onNavigateToFriendsList = { /*...*/ },
@@ -73,10 +73,10 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     }
     ```
 
-4. **Navigasi Antar Layar**  
-    Gunakan method `navigate` dalam `NavController` untuk berpindah antar layar.
+4. **Navigasi Antar Destinasi**  
+    Gunakan method `navigate` dalam `NavController` untuk berpindah antar destinasi.
     ```kotlin
-    NavHost(navController = mainNavController, startDestination = "Profile", modifier = modifier) {
+    NavHost(navController = mainNavController, startDestination = "FriendsList", modifier = modifier) {
         composable("Profile") {
             ProfileScreen(
                 onNavigateToFriendsList = {
@@ -94,8 +94,8 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     }
     ```
 
-5. **Mengirim Data Antar Layar**  
-    Anda dapat mengirim data antar layar menggunakan argumen. Ketika kamu membuat destinasi dengan composable, `NavBackStackEntry` tersedia sebagai parameter dan kita bisa menggunakanya untuk membaca argumen. Contoh:
+5. **Mengirim Data Antar Destinasi**  
+    Anda dapat mengirim data antar destinasi menggunakan argumen. Ketika kamu membuat destinasi dengan composable, `NavBackStackEntry` tersedia sebagai parameter dan kita bisa menggunakanya untuk membaca argumen. Contoh:
     ```kotlin
     composable("Profile/{name}") { backStackEntry ->
         ProfileScreen(
@@ -187,7 +187,7 @@ Pada implementasi sebelumnya, kita menggunakan string untuk mendefinisikan route
 3. **Ubah proses navigasi**  
     Untuk melakukan navigasi, masukkan route tujuan sebagai argumen menggantikan string sebelumnya.
     \
-    Anda bisa mendapatkan instance dari route dengan menggunakan `NavBackStackEntry.toRoute()`. Ketika anda membuat destinasi menggunakan `composable`, `NavBackStackEntry` tersedia sebagai parameter.
+    Ketika anda membuat destinasi menggunakan `composable`, `NavBackStackEntry` tersedia sebagai parameter dan anda bisa mendapatkan instance dari route dengan menggunakan method `NavBackStackEntry.toRoute()`
 
     ```kotlin
     composable<Profile> { backStackEntry ->
@@ -207,6 +207,78 @@ Pada implementasi sebelumnya, kita menggunakan string untuk mendefinisikan route
         )
     }
     ```
+## Kode final
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            NavigationTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    MainScreen(modifier = Modifier.padding(innerPadding))
+                }
+            }
+        }
+    }
+}
+
+@Serializable
+data class Profile(val name: String)
+@Serializable
+object FriendsList
+
+@Composable
+fun MainScreen(modifier: Modifier) {
+    val mainNavController = rememberNavController()
+    NavHost(navController = mainNavController, startDestination = Profile(name = "John Doe"), modifier = modifier) {
+        composable<Profile> { backStackEntry ->
+            val profile: Profile = backStackEntry.toRoute()
+            ProfileScreen(
+                onNavigateToFriendsList = {
+                    mainNavController.navigate(FriendsList)
+                },
+                name = profile.name
+            )
+        }
+        composable<FriendsList> {
+            FriendsListScreen(
+                onNavigateToProfile = { name ->
+                    mainNavController.navigate(Profile(name = name))
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun ProfileScreen(
+    name: String,
+    onNavigateToFriendsList: () -> Unit,
+) {
+    Column {
+        Text("Profile for ${name}")
+        Button(onClick = { onNavigateToFriendsList() }) {
+            Text("Go to Friends List")
+        }
+    }
+}
+
+@Composable
+fun FriendsListScreen(
+    onNavigateToProfile: (name: String) -> Unit
+) {
+    Column{
+        Text("Friends List")
+        Button(onClick = { onNavigateToProfile("John") }) {
+            Text("Go to John")
+        }
+        Button(onClick = { onNavigateToProfile("Doe") }) {
+            Text("Go to Doe")
+        }
+    }
+}
+```
 
 Materi selengkapnya dapat dikulik sendiri melalui URL berikut:  
 https://developer.android.com/guide/navigation  
