@@ -34,7 +34,7 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
         onNavigateToFriendsList: () -> Unit,
     ) {
         Column {
-            Text("Profile for ${name}")
+            Text("Profile for John")
             Button(onClick = { onNavigateToFriendsList() }) {
                 Text("Go to Friends List")
             }
@@ -58,18 +58,16 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     Komponen navigasi menggunakan _navigation graph_ untuk mengelola navigasi aplikasi. _Navigation graph_ adalah struktur data yang mengandung setiap destinasi dari aplikasi dan koneksi antar tujuannya. 
     \
     Pemanggilan fungsi NavHost dilakukan dengan mengisi parameter navController dengan NavController yang dibuat sebelumnya dan startDestination dengan route yang akan digunakan sebagai destinasi awal. Route disini adalah identifier unik untuk setiap destinasi.
-    \
-    Untuk mengirimkan informasi antar destinasi, sisipkan data kedalam string route.
     ```kotlin
-    NavHost(navController = mainNavController, startDestination = "Profile/John%20Doe", modifier = modifier) {
+    NavHost(navController = mainNavController, startDestination = "Profile", modifier = modifier) {
         composable("Profile") { backStackEntry ->
             ProfileScreen(
-                onNavigateToFriendsList = { },
+                onNavigateToFriendsList = { /*...*/ },
             )
         }
         composable("FriendsList") {
             FriendsListScreen(
-                onNavigateToProfile = {  }
+                onNavigateToProfile = { /*...*/ }
             )
         }
     }
@@ -107,7 +105,7 @@ Navigasi mengacu pada interaksi yang memungkinkan pengguna menavigasi melintasi,
     }
     ```
 
-    Untuk navigasi:
+    Untuk menambahkan argumen, sisipkan data kedalam string route ketika memanggil method `navigate`:
     ```kotlin
     composable("FriendsList") {
         FriendsListScreen(
