@@ -279,7 +279,8 @@ fun FriendsListScreen(
     }
 }
 ```
+<img src="/week-07/img/n1.gif" width="400"/>
 
-Materi selengkapnya dapat dikulik sendiri melalui URL berikut:  
-https://developer.android.com/guide/navigation  
-https://developer.android.com/develop/ui/compose/navigation  
+Materi selengkapnya dapat dikulik sendiri melalui URL berikut:
+https://developer.android.com/guide/navigation
+https://developer.android.com/develop/ui/compose/navigation
