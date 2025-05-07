@@ -84,7 +84,7 @@ Selain `remember`, ada juga `rememberSaveable`. Bedanya, `rememberSaveable` akan
 
 Berikut perbandingannya:
 
-| Dengan rememberSaveable               | Tanpa rememberSaveable            |
+| Tanpa rememberSaveable               | Dengan rememberSaveable            |
 | ------------------------------------- | --------------------------------- |
 | ![s3](/week-07/img/s3.gif)|![s4](/week-07/img/s4.gif)|
 
