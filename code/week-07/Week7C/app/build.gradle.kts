@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    // serialization
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -57,4 +60,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // jetpack compose navigation
+    val nav_version = "2.8.9"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // jetpack compose view model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+    // serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 }

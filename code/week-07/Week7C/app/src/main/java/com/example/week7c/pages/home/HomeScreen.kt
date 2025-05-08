@@ -18,13 +18,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.runtime.getValue
+import com.example.week7c.commons.LocalNavController
+import com.example.week7c.commons.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onLogout: () -> Unit
+    name: String
 ) {
+    val navController = LocalNavController.current
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -32,7 +35,11 @@ fun HomeScreen(
                 TopAppBar(
                     title = { Text("Home") },
                     actions = {
-                        IconButton(onClick = { onLogout() }) {
+                        IconButton(onClick = {
+                            navController.navigate(Routes.Auth) {
+                                popUpTo<Routes.Home> { inclusive = true }
+                            }
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.ExitToApp,
                                 contentDescription = "Logout"
@@ -51,7 +58,7 @@ fun HomeScreen(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Welcome to the Home Screen!",
+                text = "Welcome to the Home Screen! $name",
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.Bold
                 )

@@ -19,9 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Week7CTheme {
-                Application()
-            }
+            Application()
         }
     }
 }

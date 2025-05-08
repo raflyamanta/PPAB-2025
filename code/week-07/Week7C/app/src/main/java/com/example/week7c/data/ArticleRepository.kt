@@ -1,12 +1,8 @@
 package com.example.week7c.data
 
-data class Article(
-    val id: Int,
-    val title: String,
-    val content: String
-)
+import com.example.week7c.models.Article
 
-class HomeRepository {
+class ArticleRepository {
     fun getArticles(): List<Article> {
         return listOf(
             Article(1, "Jetpack Compose Basics", "Learn about Jetpack Compose..."),
