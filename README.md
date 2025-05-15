@@ -8,7 +8,7 @@
 4. [Basic UI Compose](./week-04/materi.md)  
 5. [Layouting dan Styling](./week-05/materi.md)  
 6. [LazyColumn dan Composable](./week-06/materi.md)
-7. Compose Navigation dan View Models
+7. [Compose Navigation dan View Models](./week-07/materi.md)
 8. Responsi 1
 9. Dependency Injection dan App Architecture
 10. HTTP Request
