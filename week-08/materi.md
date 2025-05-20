@@ -885,4 +885,3 @@ Karena sistem operasi Android membuat banyak kelas framework-nya sendiri, menggu
 - Binding bawaan untuk mewakili kelas Android seperti Application atau Activity.
 - Qualifier bawaan untuk mewakili `@ApplicationContext` dan `@ActivityContext`.
 
-K
