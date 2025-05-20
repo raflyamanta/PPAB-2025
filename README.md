@@ -10,7 +10,7 @@
 6. [LazyColumn dan Composable](./week-06/materi.md)
 7. [Compose Navigation dan View Models](./week-07/materi.md)
 8. Responsi 1
-9. Dependency Injection dan App Architecture
+9. [Dependency Injection dan App Architecture](./week-09/materi.md)
 10. HTTP Request
 11. Data Persistence 1
 12. Data Persistence 2
