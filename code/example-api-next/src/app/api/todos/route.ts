@@ -25,6 +25,11 @@ export const POST = async (request: Request) => {
 
 export const GET = async () => {
   try {
+    // return new Response(undefined, {
+    //   status: 401,
+    //   statusText: "Anda tidak memiliki hak izin untuk melakukan tindakan ini!",
+    // });
+
     const result = await db
       .selectFrom("todos")
       .select(["id", "title", "description", "status"])
