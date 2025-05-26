@@ -1,8 +1,11 @@
 package com.example.week7c.data
 
 import kotlinx.coroutines.delay
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AuthRepository {
+@Singleton
+class AuthRepository @Inject constructor() {
     suspend fun login(
         username: String,
         password: String

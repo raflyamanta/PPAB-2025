@@ -5,6 +5,10 @@ plugins {
 
     // serialization
     kotlin("plugin.serialization") version "2.0.21"
+
+    // di
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -69,4 +73,11 @@ dependencies {
 
     // serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+
+    // di
+    implementation("com.google.dagger:hilt-android:2.56.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.56.2")
+
+    // di - nav compose
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }

@@ -6,7 +6,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.week7a.pages.authentication.AuthScreen
+import com.example.week7a.pages.create_todo.CreateTodoScreen
 import com.example.week7a.pages.home.HomeScreen
 import com.example.week7a.ui.theme.Week7ATheme
 
@@ -19,15 +19,10 @@ fun Application() {
             CompositionLocalProvider(LocalNavController provides navController) {
                 NavHost(
                     navController = navController,
-                    startDestination = Routes.Authentication
+                    startDestination = Routes.Home
                 ) {
-                    composable<Routes.Authentication> {
-                        AuthScreen()
-                    }
-
-                    composable<Routes.Home> {
-                        HomeScreen()
-                    }
+                    composable<Routes.Home> { HomeScreen() }
+                    composable<Routes.CreateTodo> { CreateTodoScreen() }
                 }
             }
         }

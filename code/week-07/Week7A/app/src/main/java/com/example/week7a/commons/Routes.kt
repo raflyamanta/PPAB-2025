@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class Routes {
     @Serializable
-    object Authentication
+    object Home
 
     @Serializable
-    object Home
+    object CreateTodo
 }
