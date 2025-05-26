@@ -1,12 +1,9 @@
 package com.example.week7a.data.repositories
 
-import com.example.week7a.commons.Result
 import com.example.week7a.data.remote.requests.CreateTodoRequest
 import com.example.week7a.data.remote.retrofit.TodoApi
 import com.example.week7a.domain.models.Todo
 import com.example.week7a.domain.repositories.TodoRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class TodoRepositoryImpl @Inject constructor(
@@ -16,46 +13,36 @@ class TodoRepositoryImpl @Inject constructor(
         private const val TAG = "TodoRepositoryImpl"
     }
 
-    override fun create(title: String, description: String?): Flow<Result<String>> = flow {
-        try {
-            emit(Result.Loading)
+    override suspend fun create(title: String, description: String?): String = try {
+        val response = todoApi.create(CreateTodoRequest(title, description))
+        val body = response.body()
 
-            val response = todoApi.create(CreateTodoRequest(title, description))
-            val body = response.body()
-
-            when (response.isSuccessful && body != null) {
-                true -> emit(Result.Success(body.id))
-                false -> emit(Result.Error(response.message()))
-            }
-        } catch (e: Exception) {
-            emit(Result.Error(e.message ?: "Terjadi kesalahan tak terduga!"))
+        when (response.isSuccessful && body != null) {
+            true -> body.id
+            false -> throw Exception(response.message())
         }
+    } catch (e: Exception) {
+        throw e
     }
 
-    override fun getAll(): Flow<Result<List<Todo>>> = flow {
-        try {
-            emit(Result.Loading)
+    override suspend fun getAll(): List<Todo> = try {
+        val response = todoApi.getAll()
+        val body = response.body()
 
-            val response = todoApi.getAll()
-            val body = response.body()
-
-            when (response.isSuccessful && body != null) {
-                true -> emit(
-                    Result.Success(body.todos.map {
-                        Todo(
-                            id = it.id,
-                            title = it.title,
-                            description = it.description,
-                            status = it.status
-                        )
-                    })
+        when (response.isSuccessful && body != null) {
+            true -> body.todos.map {
+                Todo(
+                    id = it.id,
+                    title = it.title,
+                    description = it.description,
+                    status = it.status
                 )
-
-                false -> emit(Result.Error(response.message()))
             }
-        } catch (e: Exception) {
-            emit(Result.Error(e.message ?: "Terjadi kesalahan tak terduga!"))
+
+            false -> throw Exception(response.message())
         }
+    } catch (e: Exception) {
+        throw e
     }
 
     override fun get(): Todo {

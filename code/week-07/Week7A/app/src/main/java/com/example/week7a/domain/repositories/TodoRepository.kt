@@ -1,16 +1,14 @@
 package com.example.week7a.domain.repositories
 
-import com.example.week7a.commons.Result
 import com.example.week7a.domain.models.Todo
-import kotlinx.coroutines.flow.Flow
 
 interface TodoRepository {
-    fun create(
+    suspend fun create(
         title: String,
         description: String?,
-    ): Flow<Result<String>>
+    ): String
 
-    fun getAll(): Flow<Result<List<Todo>>>
+    suspend fun getAll(): List<Todo>
 
     fun get(): Todo
     fun update(): String

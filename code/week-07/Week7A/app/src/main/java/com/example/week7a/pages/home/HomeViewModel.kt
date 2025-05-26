@@ -3,8 +3,8 @@ package com.example.week7a.pages.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.week7a.commons.Result
-import com.example.week7a.domain.repositories.TodoRepository
+import com.example.week7a.commons.Resource
+import com.example.week7a.domain.usecases.GetAllTodosUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val todoRepository: TodoRepository,
+    private val getAllTodosUseCase: GetAllTodosUseCase
 ) : ViewModel() {
     companion object {
         private const val TAG = "HomeViewModel"
@@ -29,10 +29,10 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getAllTodos() {
-        todoRepository.getAll().onEach { result ->
+        getAllTodosUseCase().onEach { result ->
             Log.d(TAG, result.toString())
             when (result) {
-                is Result.Error -> _uiState.update {
+                is Resource.Error -> _uiState.update {
                     it.copy(
                         detail = HomeState.Detail.Error(
                             result.message
@@ -40,11 +40,11 @@ class HomeViewModel @Inject constructor(
                     )
                 }
 
-                is Result.Loading -> _uiState.update {
+                is Resource.Loading -> _uiState.update {
                     it.copy(detail = HomeState.Detail.Loading)
                 }
 
-                is Result.Success -> _uiState.update {
+                is Resource.Success -> _uiState.update {
                     it.copy(
                         todos = result.data,
                         detail = HomeState.Detail.Success
