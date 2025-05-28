@@ -138,7 +138,7 @@ Berikut penjelasan yang lebih lengkap dan detail tentang **Coroutine di Kotlin**
 ### **Perbandingan dengan Async/Await di JS/TS**
 
 | Konsep | JavaScript/TypeScript | Kotlin (Coroutine) |
-| | -- | -- |
+| -- | -- | -- |
 | Menandai fungsi async | `async function name()` | `suspend fun name()` |
 | Menunggu hasil async | `await functionCall()` | `val result = functionCall()` (di scope coroutine) |
 | Scope eksekusi async | Tidak eksplisit, tapi bisa dengan Promise | `CoroutineScope` seperti `lifecycleScope` |
