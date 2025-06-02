@@ -30,10 +30,9 @@
 
 ```
 dependencies {
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.compose.material3:material3:1.1.2")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 }
 ```
 
@@ -97,37 +96,6 @@ fun MyReadWriteFileTheme(
 }
 ```
 
-## 6. Menggunakan ViewModel untuk State Management – Mengelola state aplikasi.
-`ViewModel.kt`
-```kotlin
-class FileStorageViewModel : ViewModel() {
-    var title by mutableStateOf("")
-    var content by mutableStateOf("")
-    var showFileDialog by mutableStateOf(false)
-    var availableFiles by mutableStateOf(emptyArray<String>())
-
-    fun newFile() {
-        title = ""
-        content = ""
-    }
-
-    fun loadFileList(context: Context) {
-        availableFiles = context.fileList()
-        showFileDialog = true
-    }
-
-    fun saveFile(context: Context) {
-        if (title.isEmpty() || content.isEmpty()) return
-        FileHelper.writeToFile(FileModel(title, content), context)
-    }
-
-    fun loadFile(context: Context, filename: String) {
-        val file = FileHelper.readFromFile(context, filename)
-        title = file.filename ?: ""
-        content = file.data ?: ""
-    }
-}
-```
 
 ## 6. Membangun UI dengan Jetpack Compose – Desain tampilan aplikasi.
 `MainActivity.kt`
@@ -144,8 +112,37 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
+fun FileStorageScreen() {
+    // State Management
+    var title by rememberSaveable { mutableStateOf("") }
+    var content by rememberSaveable { mutableStateOf("") }
+    var showFileDialog by rememberSaveable { mutableStateOf(false) }
+    var availableFiles by rememberSaveable { mutableStateOf(emptyArray<String>()) }
+
     val context = LocalContext.current
+
+    // Handler Functions
+    fun newFile() {
+        title = ""
+        content = ""
+    }
+
+    fun loadFileList() {
+        availableFiles = context.fileList()
+        showFileDialog = true
+    }
+
+    fun saveFile() {
+        if (title.isNotEmpty() && content.isNotEmpty()) {
+            FileHelper.writeToFile(FileModel(title, content), context)
+        }
+    }
+
+    fun loadFile(filename: String) {
+        val fileModel = FileHelper.readFromFile(context, filename)
+        title = fileModel.filename ?: ""
+        content = fileModel.data ?: ""
+    }
 
     Column(
         modifier = Modifier
@@ -158,26 +155,26 @@ fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Button(
-                onClick = { viewModel.newFile() },
+                onClick = { newFile() },
                 modifier = Modifier.width(72.dp)
             ) {
                 Text("New")
             }
             Button(
-                onClick = { viewModel.loadFileList(context) },
+                onClick = { loadFileList() },
                 modifier = Modifier.width(72.dp)
             ) {
                 Text("Open")
             }
             Button(
-                onClick = { viewModel.saveFile(context) },
+                onClick = { saveFile() },
                 modifier = Modifier.width(72.dp)
             ) {
                 Text("Save")
             }
             OutlinedTextField(
-                value = viewModel.title,
-                onValueChange = { viewModel.title = it },
+                value = title,
+                onValueChange = { title = it },
                 label = { Text("Title") },
                 modifier = Modifier.weight(1f)
             )
@@ -187,8 +184,8 @@ fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
 
         // Content editor
         OutlinedTextField(
-            value = viewModel.content,
-            onValueChange = { viewModel.content = it },
+            value = content,
+            onValueChange = { content = it },
             label = { Text("Content") },
             modifier = Modifier
                 .fillMaxSize()
@@ -201,17 +198,17 @@ fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
     }
 
     // File selection dialog
-    if (viewModel.showFileDialog) {
+    if (showFileDialog) {
         AlertDialog(
-            onDismissRequest = { viewModel.showFileDialog = false },
+            onDismissRequest = { showFileDialog = false },
             title = { Text("Pilih file") },
             text = {
                 Column {
-                    viewModel.availableFiles.forEach { filename ->
+                    availableFiles.forEach { filename ->
                         TextButton(
                             onClick = {
-                                viewModel.loadFile(context, filename)
-                                viewModel.showFileDialog = false
+                                loadFile(filename)
+                                showFileDialog = false
                             }
                         ) {
                             Text(filename)
@@ -221,7 +218,7 @@ fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
             },
             confirmButton = {
                 TextButton(
-                    onClick = { viewModel.showFileDialog = false }
+                    onClick = { showFileDialog = false }
                 ) {
                     Text("Cancel")
                 }
