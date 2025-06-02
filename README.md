@@ -11,8 +11,8 @@
 7. [Compose Navigation dan View Models](./week-07/materi.md)
 8. Responsi 1
 9. [Dependency Injection dan App Architecture](./week-09/materi.md)
-10. HTTP Request
-11. Data Persistence 1
+10. [HTTP Request](./week-10/materi.md)
+11. [Data Persistence 1](./week-11/materi.md)
 12. Data Persistence 2
 13. Work Manager
 14. Responsi 2
