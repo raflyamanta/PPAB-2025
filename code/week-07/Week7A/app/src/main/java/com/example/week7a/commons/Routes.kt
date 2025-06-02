@@ -9,4 +9,7 @@ sealed class Routes {
 
     @Serializable
     object CreateTodo
+
+    @Serializable
+    object Setting
 }

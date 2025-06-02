@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,8 +31,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.week7a.commons.LocalNavController
 import com.example.week7a.commons.Routes
+import com.example.week7a.commons.compositions.LocalNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,6 +63,11 @@ fun HomeScreen(
                         onClick = { viewModel.getAllTodos() },
                     ) {
                         Icon(Icons.Rounded.Refresh, contentDescription = null)
+                    }
+                    IconButton(
+                        onClick = { navController.navigate(Routes.Setting) }
+                    ) {
+                        Icon(Icons.Rounded.Settings, contentDescription = null)
                     }
                 }
             )

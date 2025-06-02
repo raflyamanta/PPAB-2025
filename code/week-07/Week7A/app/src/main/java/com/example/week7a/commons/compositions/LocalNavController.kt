@@ -1,4 +1,4 @@
-package com.example.week7a.commons
+package com.example.week7a.commons.compositions
 
 import androidx.compose.runtime.compositionLocalOf
 import androidx.navigation.NavController
