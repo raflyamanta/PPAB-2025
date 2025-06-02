@@ -50,9 +50,8 @@ data class FileModel(
 )
 ```
 
-4. Membuat FileHelper – Class utilitas untuk operasi baca/tulis file.
-
-
+##4. Membuat FileHelper – Class utilitas untuk operasi baca/tulis file.
+`FileHelper.kt`
 ```kotlin
 internal object FileHelper {
     fun writeToFile(fileModel: FileModel, context: Context) {
@@ -73,9 +72,176 @@ internal object FileHelper {
 ```
 
 ## 5. Menambahkan Theme sendiri
+`MyReadAndWriteTheme.kt`
+```kotlin
+private val DarkColorScheme = darkColorScheme(
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80
+)
 
+private val LightColorScheme = lightColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40
+)
 
+@Composable
+fun MyReadWriteFileTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+```
+
+## 6. Menggunakan ViewModel untuk State Management – Mengelola state aplikasi.
+`ViewModel.kt`
+```kotlin
+class FileStorageViewModel : ViewModel() {
+    var title by mutableStateOf("")
+    var content by mutableStateOf("")
+    var showFileDialog by mutableStateOf(false)
+    var availableFiles by mutableStateOf(emptyArray<String>())
+
+    fun newFile() {
+        title = ""
+        content = ""
+    }
+
+    fun loadFileList(context: Context) {
+        availableFiles = context.fileList()
+        showFileDialog = true
+    }
+
+    fun saveFile(context: Context) {
+        if (title.isEmpty() || content.isEmpty()) return
+        FileHelper.writeToFile(FileModel(title, content), context)
+    }
+
+    fun loadFile(context: Context, filename: String) {
+        val file = FileHelper.readFromFile(context, filename)
+        title = file.filename ?: ""
+        content = file.data ?: ""
+    }
+}
+```
+
+## 6. Membangun UI dengan Jetpack Compose – Desain tampilan aplikasi.
+`MainActivity.kt`
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MyReadWriteFileTheme {
+                FileStorageScreen()
+            }
+        }
+    }
+}
+
+@Composable
+fun FileStorageScreen(viewModel: FileStorageViewModel = viewModel()) {
+    val context = LocalContext.current
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        // Header with buttons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = { viewModel.newFile() },
+                modifier = Modifier.width(72.dp)
+            ) {
+                Text("New")
+            }
+            Button(
+                onClick = { viewModel.loadFileList(context) },
+                modifier = Modifier.width(72.dp)
+            ) {
+                Text("Open")
+            }
+            Button(
+                onClick = { viewModel.saveFile(context) },
+                modifier = Modifier.width(72.dp)
+            ) {
+                Text("Save")
+            }
+            OutlinedTextField(
+                value = viewModel.title,
+                onValueChange = { viewModel.title = it },
+                label = { Text("Title") },
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Content editor
+        OutlinedTextField(
+            value = viewModel.content,
+            onValueChange = { viewModel.content = it },
+            label = { Text("Content") },
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
+            textStyle = LocalTextStyle.current.copy(
+                textAlign = TextAlign.Start
+            ),
+            singleLine = false
+        )
+    }
+
+    // File selection dialog
+    if (viewModel.showFileDialog) {
+        AlertDialog(
+            onDismissRequest = { viewModel.showFileDialog = false },
+            title = { Text("Pilih file") },
+            text = {
+                Column {
+                    viewModel.availableFiles.forEach { filename ->
+                        TextButton(
+                            onClick = {
+                                viewModel.loadFile(context, filename)
+                                viewModel.showFileDialog = false
+                            }
+                        ) {
+                            Text(filename)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { viewModel.showFileDialog = false }
+                ) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewFileStorageScreen() {
+    MyReadWriteFileTheme {
+        FileStorageScreen()
+    }
+}
+```
 ## Referensi Tambahan
 
 [Nikoloz Akhvlediani - Scoped Storage, SAF & MediaStore](https://www.youtube.com/watch?v=8Qs8jCOgEyI)
