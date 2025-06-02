@@ -46,7 +46,7 @@ data class FileModel(
 )
 ```
 
-##4. Membuat FileHelper – Class utilitas untuk operasi baca/tulis file.
+## 4. Membuat FileHelper – Class utilitas untuk operasi baca/tulis file.
 `FileHelper.kt`
 ```kotlin
 internal object FileHelper {
