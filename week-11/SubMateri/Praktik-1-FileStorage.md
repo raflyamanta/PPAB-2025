@@ -240,7 +240,7 @@ fun PreviewFileStorageScreen() {
 ```
 Berikut adalah hasil tampilannya:
 
-![Result](Praktik-1-1Result.png)
+![Result](Praktik-1-1Result.jpg)
 
 ## Referensi Tambahan
 
