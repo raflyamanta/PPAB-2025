@@ -9,9 +9,8 @@
 3. Membuat Model Data (FileModel) – Menyimpan informasi file.
 4. Membuat FileHelper – Class utilitas untuk operasi baca/tulis file.
 5. Menambahkan Theme sendiri
-6. Menggunakan ViewModel untuk State Management – Mengelola state aplikasi.
-7. Membangun UI dengan Jetpack Compose – Desain tampilan aplikasi.
-8. Menjalankan aplikasi.
+6. Membangun UI dengan Jetpack Compose – Desain tampilan aplikasi.
+7. Menjalankan aplikasi.
 
 ## 1. Buat Project Baru
 
