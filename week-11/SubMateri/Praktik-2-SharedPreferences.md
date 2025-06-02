@@ -1,548 +1,201 @@
-**[{{ Modul Materi (SharedPreferences) }}](2-SharedPreferences.md)**
+## Praktik SharedPreferences dengan Jetpack Compose
 
-# Praktik SharedPreferences
+Pada praktik ini, kita akan membangun aplikasi penyimpanan data sederhana menggunakan SharedPreferences dengan Jetpack Compose. Berikut adalah alur dan contoh kode Compose yang dapat digunakan.
 
-## Alur Praktikum
-
-1. Membuat project baru dengan nama MySharedPreferences.
-2. Mengatur tampilan pada berkas layout XML.
-3. Membuat kelas model untuk menampung sementara data pengguna.
-4. Membuat kelas UserPreference untuk menyimpan data pengguna menggunakan SharedPreference.
-5. Mengimplementasikan UserPreference ke dalam Activity.
-6. Menjalankan aplikasi.
-
-## 1. Buat Project Baru
+### 1. Buat Project Baru
 
 | Field                        | Value                |
 | ---------------------------- | -------------------- |
 | Nama Project                 | MySharedPreferences  |
-| Templates                    | Phone and Tablet     |
-| Tipe Activity                | Empty Views Activity |
+| Templates                    | Empty Activity       |
 | Language                     | Kotlin               |
-| Minimum SDK                  | API level 29         |
+| Minimum SDK                  | API level 20         |
 | Build Configuration Language | Kotlin DSL           |
 
-## 2. Mengatur Tampilan
+### 2. Tambahkan Dependensi
 
-`activity_main.xml`
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/name" />
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="@string/dummy_name" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/email" />
-    <TextView
-        android:id="@+id/tv_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="@string/dummy_email" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/phone_number" />
-    <TextView
-        android:id="@+id/tv_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="@string/dummynumber" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/age" />
-    <TextView
-        android:id="@+id/tv_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="@string/dummyage" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/love_manchester_united" />
-    <TextView
-        android:id="@+id/tv_is_love_mu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="@string/dummyislove" />
-    <Button
-        android:id="@+id/btn_save"
-        style="@style/Base.Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save" />
-</LinearLayout>
-```
-
----
-
-`strings.xml`
-
-```xml
-<resources>
-    <string name="app_name">MySharedPreference</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
-    <string name="phone_number">No Handphone</string>
-    <string name="age">Age</string>
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
-    <string name="save">Simpan</string>
-    <string name="love_manchester_united">Suka manchester united?</string>
-    <string name="change">Ubah</string>
-    <string name="dummy_name">Haizk</string>
-    <string name="dummy_email">haizk@gmail.com</string>
-    <string name="dummynumber">123456</string>
-    <string name="dummyage">30</string>
-    <string name="dummyislove">IsLoveMU</string>
-</resources>
-```
-
-Berikut adalah hasil tampilannya:
-
-![Result](Praktik-2-1Result.png)
-
-## 3. Membuat Data Class (User)
-
-Implementasikan Parcelable pada `build.gradle.tks (module:app)`.
-
-```gradle
-plugins {
-    id("kotlin-parcelize") //"
-}
-```
-
----
-
-![Data Class](Praktik-2-2DataClass.png)
+Pastikan `build.gradle.kts (app)` sudah mengaktifkan Compose dan menambahkan dependensi berikut:
 
 ```kotlin
-@Parcelize
-data class UserModel (
-        var name: String? = null,
-        var email: String? = null,
-        var age: Int = 0,
-        var phoneNumber: String? = null,
-        var isLove: Boolean = false
-) : Parcelable
-```
-
-## 4. Membuat Class UserPreference
-
-![Class](Praktik-2-3Class.png)
-
-```kotlin
-internal class UserPreference(context: Context) {
-    companion object {
-        private const val PREFS_NAME = "user_pref"
-        private const val NAME = "name"
-        private const val EMAIL = "email"
-        private const val AGE = "age"
-        private const val PHONE_NUMBER = "phone"
-        private const val LOVE_MU = "islove"
-    }
-    private val preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    fun setUser(value: UserModel) {
-        val editor = preferences.edit()
-        editor.putString(NAME, value.name)
-        editor.putString(EMAIL, value.email)
-        editor.putInt(AGE, value.age)
-        editor.putString(PHONE_NUMBER, value.phoneNumber)
-        editor.putBoolean(LOVE_MU, value.isLove)
-        editor.apply()
-    }
-    fun getUser(): UserModel {
-        val model = UserModel()
-        model.name = preferences.getString(NAME, "")
-        model.email = preferences.getString(EMAIL, "")
-        model.age = preferences.getInt(AGE, 0)
-        model.phoneNumber = preferences.getString(PHONE_NUMBER, "")
-        model.isLove = preferences.getBoolean(LOVE_MU, false)
-        return model
-    }
-}
-```
-
-## 5. Membuat Activity
-
-Tambahkan `View Binding` pada `build.gradle.kts (app)` terlebih dahulu lalu `sync`.
-
-```gradle
 android {
     ...
-
     buildFeatures {
-        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
+}
+dependencies {
+    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
+}
+```
+
+### 3. Data Class User
+
+```kotlin
+data class UserModel(
+    var name: String = "",
+    var email: String = "",
+    var age: Int = 0,
+    var phoneNumber: String = "",
+    var isLove: Boolean = false
+)
+```
+
+### 4. UserPreference Class
+
+```kotlin
+class UserPreference(context: Context) {
+    private val prefs = context.getSharedPreferences("user_pref", Context.MODE_PRIVATE)
+
+    fun setUser(user: UserModel) {
+        prefs.edit().apply {
+            putString("name", user.name)
+            putString("email", user.email)
+            putInt("age", user.age)
+            putString("phone", user.phoneNumber)
+            putBoolean("islove", user.isLove)
+            apply()
+        }
+    }
+
+    fun getUser(): UserModel {
+        return UserModel(
+            name = prefs.getString("name", "") ?: "",
+            email = prefs.getString("email", "") ?: "",
+            age = prefs.getInt("age", 0),
+            phoneNumber = prefs.getString("phone", "") ?: "",
+            isLove = prefs.getBoolean("islove", false)
+        )
     }
 }
 ```
 
----
-
-![Activity](Praktik-2-4Activity.png)
+### 5. MainActivity dengan Jetpack Compose
 
 ```kotlin
-class FormUserPreferenceActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var binding: ActivityFormUserPreferenceBinding
-
-    companion object {
-        const val EXTRA_TYPE_FORM = "extra_type_form"
-        const val EXTRA_RESULT = "extra_result"
-        const val RESULT_CODE = 101
-
-        const val TYPE_ADD = 1
-        const val TYPE_EDIT = 2
-
-        private const val FIELD_REQUIRED = "Field tidak boleh kosong"
-        private const val FIELD_DIGIT_ONLY = "Hanya boleh terisi numerik"
-        private const val FIELD_IS_NOT_VALID = "Email tidak valid"
-    }
-
-    private lateinit var userModel: UserModel
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFormUserPreferenceBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.btnSave.setOnClickListener(this)
-
-        userModel = intent.getParcelableExtra<UserModel>("USER") as UserModel
-        val formType = intent.getIntExtra(EXTRA_TYPE_FORM, 0)
-
-        var actionBarTitle = ""
-        var btnTitle = ""
-
-        when (formType) {
-            TYPE_ADD -> {
-                actionBarTitle = "Tambah Baru"
-                btnTitle = "Simpan"
-            }
-            TYPE_EDIT -> {
-                actionBarTitle = "Ubah"
-                btnTitle = "Update"
-                showPreferenceInForm()
-            }
-        }
-
-        supportActionBar?.title = actionBarTitle
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.btnSave.text = btnTitle
-
-    }
-
-    private fun showPreferenceInForm() {
-        binding.edtName.setText(userModel.name)
-        binding.edtEmail.setText(userModel.email)
-        binding.edtAge.setText(userModel.age.toString())
-        binding.edtPhone.setText(userModel.phoneNumber)
-        if (userModel.isLove) {
-            binding.rbYes.isChecked = true
-        } else {
-            binding.rbNo.isChecked = true
-        }
-    }
-
-    override fun onClick(view: View) {
-        if (view.id == R.id.btn_save) {
-            val name = binding.edtName.text.toString().trim()
-            val email = binding.edtEmail.text.toString().trim()
-            val age = binding.edtAge.text.toString().trim()
-            val phoneNo = binding.edtPhone.text.toString().trim()
-            val isLoveMU = binding.rgLoveMu.checkedRadioButtonId == R.id.rb_yes
-
-            if (name.isEmpty()) {
-                binding.edtName.error = FIELD_REQUIRED
-                return
-            }
-
-            if (email.isEmpty()) {
-                binding.edtEmail.error = FIELD_REQUIRED
-                return
-            }
-
-            if (!isValidEmail(email)) {
-                binding.edtEmail.error = FIELD_IS_NOT_VALID
-                return
-            }
-
-            if (age.isEmpty()) {
-                binding.edtAge.error = FIELD_REQUIRED
-                return
-            }
-
-            if (phoneNo.isEmpty()) {
-                binding.edtPhone.error = FIELD_REQUIRED
-                return
-            }
-
-            if (!TextUtils.isDigitsOnly(phoneNo)) {
-                binding.edtPhone.error = FIELD_DIGIT_ONLY
-                return
-            }
-
-            saveUser(name, email, age, phoneNo, isLoveMU)
-
-            val resultIntent = Intent()
-            resultIntent.putExtra(EXTRA_RESULT, userModel)
-            setResult(RESULT_CODE, resultIntent)
-
-            finish()
-        }
-    }
-
-    private fun saveUser(name: String, email: String, age: String, phoneNo: String, isLoveMU: Boolean) {
         val userPreference = UserPreference(this)
+        setContent {
+            var user by remember { mutableStateOf(userPreference.getUser()) }
+            var isEditing by remember { mutableStateOf(false) }
 
-        userModel.name = name
-        userModel.email = email
-        userModel.age = Integer.parseInt(age)
-        userModel.phoneNumber = phoneNo
-        userModel.isLove = isLoveMU
-
-        userPreference.setUser(userModel)
-        Toast.makeText(this, "Data tersimpan", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun isValidEmail(email: CharSequence): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
+            Surface(modifier = Modifier.fillMaxSize()) {
+                if (isEditing) {
+                    UserForm(
+                        user = user,
+                        onSave = {
+                            userPreference.setUser(it)
+                            user = it
+                            isEditing = false
+                        },
+                        onCancel = { isEditing = false }
+                    )
+                } else {
+                    UserProfile(
+                        user = user,
+                        onEdit = { isEditing = true }
+                    )
+                }
+            }
         }
-        return super.onOptionsItemSelected(item)
     }
 }
 ```
 
----
-
-`activity_form_user_preference_activity.xml`
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_form_user_preference"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FormUserPreferenceActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <EditText
-                android:id="@+id/edt_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/name"
-                android:inputType="textPersonName"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <EditText
-                android:id="@+id/edt_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-            <EditText
-                android:id="@+id/edt_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/age"
-                android:inputType="number"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/love_manchester_united" />
-        <RadioGroup
-            android:id="@+id/rg_love_mu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/rb_yes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/yes" />
-            <RadioButton
-                android:id="@+id/rb_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/no" />
-        </RadioGroup>
-        <Button
-            android:id="@+id/btn_save"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save" />
-    </LinearLayout>
-</ScrollView>
-```
-
-## 6. Tambahkan Kode pada MainActivity sehingga Menjadi seperti Berikut
+### 6. Composable UserProfile
 
 ```kotlin
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var mUserPreference: UserPreference
-    private lateinit var binding: ActivityMainBinding
-
-    private var isPreferenceEmpty = false
-    private lateinit var userModel: UserModel
-
-    private val resultLauncher = registerForActivityResult(
-        StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.data != null && result.resultCode == FormUserPreferenceActivity.RESULT_CODE) {
-            userModel = result.data?.getParcelableExtra<UserModel>(FormUserPreferenceActivity.EXTRA_RESULT) as UserModel
-            populateView(userModel)
-            checkForm(userModel)
+@Composable
+fun UserProfile(user: UserModel, onEdit: () -> Unit) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Name: ${user.name.ifEmpty { "Tidak Ada" }}")
+        Text("Email: ${user.email.ifEmpty { "Tidak Ada" }}")
+        Text("Phone: ${user.phoneNumber.ifEmpty { "Tidak Ada" }}")
+        Text("Age: ${if (user.age == 0) "Tidak Ada" else user.age}")
+        Text("Suka Manchester United? ${if (user.isLove) "Ya" else "Tidak"}")
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = onEdit) {
+            Text(if (user.name.isEmpty()) "Simpan" else "Ubah")
         }
     }
+}
+```
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+### 7. Composable UserForm
 
-        supportActionBar?.title = "My User Preference"
+```kotlin
+@Composable
+fun UserForm(
+    user: UserModel,
+    onSave: (UserModel) -> Unit,
+    onCancel: () -> Unit
+) {
+    var name by remember { mutableStateOf(user.name) }
+    var email by remember { mutableStateOf(user.email) }
+    var phone by remember { mutableStateOf(user.phoneNumber) }
+    var age by remember { mutableStateOf(if (user.age == 0) "" else user.age.toString()) }
+    var isLove by remember { mutableStateOf(user.isLove) }
 
-        mUserPreference = UserPreference(this)
-
-        showExistingPreference()
-
-        binding.btnSave.setOnClickListener(this)
-
-    }
-
-    private fun showExistingPreference() {
-        userModel = mUserPreference.getUser()
-        populateView(userModel)
-        checkForm(userModel)
-    }
-
-    private fun populateView(userModel: UserModel) {
-        binding.tvName.text =
-            if (userModel.name.toString().isEmpty()) "Tidak Ada" else userModel.name
-        binding.tvAge.text =
-            if (userModel.age.toString().isEmpty()) "Tidak Ada" else userModel.age.toString()
-        binding.tvIsLoveMu.text = if (userModel.isLove) "Ya" else "Tidak"
-        binding.tvEmail.text =
-            if (userModel.email.toString().isEmpty()) "Tidak Ada" else userModel.email
-        binding.tvPhone.text =
-            if (userModel.phoneNumber.toString().isEmpty()) "Tidak Ada" else userModel.phoneNumber
-    }
-
-    private fun checkForm(userModel: UserModel) {
-        when {
-            userModel.name.toString().isNotEmpty() -> {
-                binding.btnSave.text = getString(R.string.change)
-                isPreferenceEmpty = false
-            }
-            else -> {
-                binding.btnSave.text = getString(R.string.save)
-                isPreferenceEmpty = true
-            }
+    Column(modifier = Modifier.padding(16.dp)) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = phone,
+            onValueChange = { phone = it },
+            label = { Text("No Handphone") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = age,
+            onValueChange = { if (it.all { c -> c.isDigit() }) age = it },
+            label = { Text("Age") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Suka Manchester United?")
+            Checkbox(
+                checked = isLove,
+                onCheckedChange = { isLove = it }
+            )
         }
-    }
-
-    override fun onClick(view: View) {
-        if (view.id == R.id.btn_save) {
-            val intent = Intent(this@MainActivity, FormUserPreferenceActivity::class.java)
-            when {
-                isPreferenceEmpty -> {
-                    intent.putExtra(
-                        FormUserPreferenceActivity.EXTRA_TYPE_FORM,
-                        FormUserPreferenceActivity.TYPE_ADD
+        Spacer(modifier = Modifier.height(16.dp))
+        Row {
+            Button(onClick = {
+                if (name.isNotBlank() && email.isNotBlank() && phone.isNotBlank() && age.isNotBlank()) {
+                    onSave(
+                        UserModel(
+                            name = name,
+                            email = email,
+                            phoneNumber = phone,
+                            age = age.toIntOrNull() ?: 0,
+                            isLove = isLove
+                        )
                     )
-                    intent.putExtra("USER", userModel)
                 }
-                else -> {
-                    intent.putExtra(
-                        FormUserPreferenceActivity.EXTRA_TYPE_FORM,
-                        FormUserPreferenceActivity.TYPE_EDIT
-                    )
-                    intent.putExtra("USER", userModel)
-                }
+            }) {
+                Text("Simpan")
             }
-            resultLauncher.launch(intent)
+            Spacer(modifier = Modifier.width(8.dp))
+            OutlinedButton(onClick = onCancel) {
+                Text("Batal")
+            }
         }
     }
 }
@@ -550,10 +203,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 ---
 
-![GIF](Praktik-2-5GIF.gif)
-
-## Referensi Tambahan
-
-[Philipp Lackner - Sharing Data with SharedPreferences](https://www.youtube.com/watch?v=wtpRp2IpCSo)
-
-**[{{ Modul Materi (SharedPreferences) }}](2-SharedPreferences.md)**
+Referensi tambahan:  
+- [Philipp Lackner - Sharing Data with SharedPreferences](https://www.youtube.com/watch?v=wtpRp2IpCSo)
