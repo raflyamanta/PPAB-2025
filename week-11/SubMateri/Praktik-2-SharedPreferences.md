@@ -203,5 +203,7 @@ fun UserForm(
 
 ---
 
+![Tampilan Akhir](Praktik-2-Result.gif)
+
 Referensi tambahan:  
 - [Philipp Lackner - Sharing Data with SharedPreferences](https://www.youtube.com/watch?v=wtpRp2IpCSo)
