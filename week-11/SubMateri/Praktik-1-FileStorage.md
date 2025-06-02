@@ -37,10 +37,6 @@ dependencies {
 }
 ```
 
-Berikut adalah hasil tampilannya:
-
-![Result](Praktik-1-1Result.png)
-
 ## 3. Membuat Model Data (FileModel) – Menyimpan informasi file.
 `FileModel.kt`
 ```kotlin
@@ -242,6 +238,10 @@ fun PreviewFileStorageScreen() {
     }
 }
 ```
+Berikut adalah hasil tampilannya:
+
+![Result](Praktik-1-1Result.png)
+
 ## Referensi Tambahan
 
 [Nikoloz Akhvlediani - Scoped Storage, SAF & MediaStore](https://www.youtube.com/watch?v=8Qs8jCOgEyI)
