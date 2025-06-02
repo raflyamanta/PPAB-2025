@@ -1,4 +1,4 @@
-package com.example.week7a.pages.create_todo
+package com.example.week7a.presentation.create_todo
 
 data class CreateTodoState(
     val detail: Detail = Detail.Initial

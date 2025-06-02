@@ -14,4 +14,13 @@ interface TodoApi {
 
     @GET("/api/todos")
     suspend fun getAll(): Response<GetAllTodosResponse>
+
+//    @GET("/api/todos/{todo_id}")
+//    suspend fun get(@Path("todo_id") todoId: String): Response<Unit>
+//
+//    @PUT("/api/todos/{todo_id}")
+//    suspend fun update(@Path("todo_id") todoId: String): Response<Unit>
+//
+//    @DELETE("/api/todos/{todo_id}")
+//    suspend fun delete(@Path("todo_id") todoId: String): Response<Unit>
 }

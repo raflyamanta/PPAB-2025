@@ -1,4 +1,4 @@
-package com.example.week7a.pages.home
+package com.example.week7a.presentation.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

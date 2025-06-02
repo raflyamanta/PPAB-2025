@@ -6,8 +6,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.week7a.pages.create_todo.CreateTodoScreen
-import com.example.week7a.pages.home.HomeScreen
+import com.example.week7a.presentation.create_todo.CreateTodoScreen
+import com.example.week7a.presentation.home.HomeScreen
 import com.example.week7a.ui.theme.Week7ATheme
 
 @Composable

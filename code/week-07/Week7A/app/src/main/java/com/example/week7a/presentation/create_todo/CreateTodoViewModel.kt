@@ -1,4 +1,4 @@
-package com.example.week7a.pages.create_todo
+package com.example.week7a.presentation.create_todo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
-import com.example.week7a.pages.create_todo.CreateTodoState as State
+import com.example.week7a.presentation.create_todo.CreateTodoState as State
 
 @HiltViewModel
 class CreateTodoViewModel @Inject constructor(
