@@ -45,5 +45,5 @@
   1. [Rizki Maulana](https://github.com/rizkimaulana32)
   2. [Rizal Dwi Anggoro](https://github.com/rizalanggoro)
 - Kelas D
-  1. [Muhamamd Ryan Fikri Fakhrezi](https://github.com/yanfiq)
+  1. [Muhammad Ryan Fikri Fakhrezi](https://github.com/yanfiq)
   2. [M. Bagas Abidawaqli](https://github.com/abqli484)
