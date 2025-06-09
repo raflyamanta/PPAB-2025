@@ -19,12 +19,9 @@ class TodoRepositoryImpl @Inject constructor(
         private const val TAG = "TodoRepositoryImpl"
     }
 
-    override suspend fun create(title: String, description: String?): String = try {
+    override suspend fun create(title: String, description: String?) {
         val todo = TodoEntity(title = title, description = description, status = false)
         todoDao.insertTodo(todo)
-        "Berhasil menambahkan todo!"
-    } catch (e: Exception) {
-        throw e
     }
 
     override suspend fun getAll(): List<Todo> {
@@ -38,7 +35,7 @@ class TodoRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun delete(todo: Todo): String = try {
+    override suspend fun delete(todo: Todo) {
         val entity = TodoEntity(
             id = todo.id.toInt(),
             title = todo.title,
@@ -46,11 +43,19 @@ class TodoRepositoryImpl @Inject constructor(
             status = todo.status
         )
         todoDao.deleteTodo(entity)
-        "Berhasil menghapus todo"
-    } catch (e: Exception) {
-        throw e
     }
 
+    override suspend fun update(todo: Todo, newStatus: Boolean) {
+        val entity = TodoEntity(
+            id = todo.id.toInt(),
+            title = todo.title,
+            description = todo.description,
+            status = todo.status
+        )
+
+        entity.status = newStatus
+        todoDao.updateTodo(entity)
+    }
 
 //    override suspend fun create(title: String, description: String?): String = try {
 //        val response = todoApi.create(CreateTodoRequest(title, description))
@@ -84,11 +89,4 @@ class TodoRepositoryImpl @Inject constructor(
 //        throw e
 //    }
 
-    override fun get(): Todo {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(): String {
-        TODO("Not yet implemented")
-    }
 }

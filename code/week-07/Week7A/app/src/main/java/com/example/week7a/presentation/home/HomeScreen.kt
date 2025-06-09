@@ -1,6 +1,5 @@
 package com.example.week7a.presentation.home
 
-import android.R.attr.onClick
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,6 +15,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -83,12 +83,12 @@ fun HomeScreen(
         }
     ) {
         LazyColumn(modifier = Modifier.padding(it)) {
-            if (uiState.detail is HomeState.Detail.Loading)
-                item {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                    }
-                }
+//            if (uiState.detail is HomeState.Detail.Loading)
+//                item {
+//                    Box(modifier = Modifier.fillMaxWidth()) {
+//                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+//                    }
+//                }
 
             items(uiState.todos) { todo ->
                 Card(
@@ -103,8 +103,18 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        // Checkbox di kiri
+                        Checkbox(
+                            checked = todo.status,
+                            onCheckedChange = { isChecked ->
+                                viewModel.updateTodo(todo, isChecked)
+                            }
+                        )
+
                         Column(
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 8.dp)
                         ) {
                             Text(
                                 todo.title,
@@ -119,8 +129,9 @@ fun HomeScreen(
                                 )
                         }
 
+                        // Tombol delete di kanan
                         IconButton(
-                            onClick = {viewModel.deleteTodo(todo) }
+                            onClick = { viewModel.deleteTodo(todo) }
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Delete,

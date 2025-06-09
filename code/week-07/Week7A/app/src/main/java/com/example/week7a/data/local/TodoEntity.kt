@@ -18,5 +18,5 @@ data class TodoEntity(
     val description: String? = null,
 
     @ColumnInfo(name = "status")
-    val status: Boolean = false
+    var status: Boolean = false
 )

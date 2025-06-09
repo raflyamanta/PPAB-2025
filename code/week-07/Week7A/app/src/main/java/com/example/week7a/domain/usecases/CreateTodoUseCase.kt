@@ -12,7 +12,7 @@ class CreateTodoUseCase @Inject constructor(
     operator fun invoke(
         title: String,
         description: String?,
-    ): Flow<Resource<String>> = flow {
+    ): Flow<Resource<Unit>> = flow {
         try {
             emit(Resource.Loading)
 
@@ -21,8 +21,8 @@ class CreateTodoUseCase @Inject constructor(
                 return@flow
             }
 
-            val result = todoRepository.create(title, description)
-            emit(Resource.Success(result))
+            todoRepository.create(title, description)
+            emit(Resource.Success(Unit))
         } catch (e: Exception) {
             emit(Resource.Error(e.message ?: "Terjadi kesalahan tak terduga!"))
         }

@@ -7,16 +7,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class DeleteTodoUseCase @Inject constructor(
+class UpdateTodoUseCase @Inject constructor(
     private val todoRepository: TodoRepository
 ) {
-    operator fun invoke(todo: Todo): Flow<Resource<Unit>> = flow {
-        emit(Resource.Loading)
+    operator fun invoke(todo: Todo, newStatus: Boolean): Flow<Resource<Unit>> = flow {
         try {
-            todoRepository.delete(todo)
+            emit(Resource.Loading)
+            todoRepository.update(todo, newStatus)
             emit(Resource.Success(Unit))
         } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Gagal menghapus todo"))
+            emit(Resource.Error(e.message ?: "Terjadi kesalahan saat update"))
         }
     }
 }

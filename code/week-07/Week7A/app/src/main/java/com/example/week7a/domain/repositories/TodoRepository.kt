@@ -6,11 +6,11 @@ interface TodoRepository {
     suspend fun create(
         title: String,
         description: String?,
-    ): String
+    )
 
     suspend fun getAll(): List<Todo>
 
-    fun get(): Todo
-    fun update(): String
-    suspend fun delete(todo: Todo): String
+    suspend fun update(todo: Todo, newStatus: Boolean)
+
+    suspend fun delete(todo: Todo)
 }
