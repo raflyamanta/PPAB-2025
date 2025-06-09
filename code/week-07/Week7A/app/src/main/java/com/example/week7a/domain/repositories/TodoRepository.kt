@@ -12,5 +12,5 @@ interface TodoRepository {
 
     fun get(): Todo
     fun update(): String
-    fun delete(): String
+    suspend fun delete(todo: Todo): String
 }

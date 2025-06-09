@@ -34,7 +34,7 @@ fun ComposeApplication(initialTheme: ThemeController) {
                 CompositionLocalProvider(LocalNavController provides navController) {
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.Setting
+                        startDestination = Routes.Home
                     ) {
                         composable<Routes.Home> { HomeScreen() }
                         composable<Routes.CreateTodo> { CreateTodoScreen() }

@@ -47,7 +47,7 @@ fun CreateTodoScreen(
             when (this) {
                 is CreateTodoState.Detail.Success -> {
                     Toast.makeText(context, "Berhasil menambahkan todo!", Toast.LENGTH_SHORT).show()
-                    navController.popBackStack()
+                    navController.navigateUp()
                 }
 
                 is CreateTodoState.Detail.Error -> Toast.makeText(

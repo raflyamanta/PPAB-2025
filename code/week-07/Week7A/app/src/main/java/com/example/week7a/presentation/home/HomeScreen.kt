@@ -1,13 +1,17 @@
 package com.example.week7a.presentation.home
 
+import android.R.attr.onClick
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Settings
@@ -86,28 +90,46 @@ fun HomeScreen(
                     }
                 }
 
-            items(uiState.todos) {
+            items(uiState.todos) { todo ->
                 Card(
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
                         .fillMaxWidth()
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            it.title,
-                            style = MaterialTheme.typography.titleMedium,
-                            textDecoration = if (it.status) TextDecoration.LineThrough else TextDecoration.None
-                        )
-                        if (it.description != null)
+                    Row(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
                             Text(
-                                it.description,
-                                style = MaterialTheme.typography.bodySmall,
-                                textDecoration = if (it.status) TextDecoration.LineThrough else TextDecoration.None
+                                todo.title,
+                                style = MaterialTheme.typography.titleMedium,
+                                textDecoration = if (todo.status) TextDecoration.LineThrough else TextDecoration.None
                             )
+                            if (todo.description != null)
+                                Text(
+                                    todo.description,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    textDecoration = if (todo.status) TextDecoration.LineThrough else TextDecoration.None
+                                )
+                        }
+
+                        IconButton(
+                            onClick = {viewModel.deleteTodo(todo) }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Delete Todo"
+                            )
+                        }
                     }
                 }
             }
-
         }
     }
 }

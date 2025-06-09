@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.week7a.commons.Resource
+import com.example.week7a.domain.models.Todo
+import com.example.week7a.domain.usecases.DeleteTodoUseCase
 import com.example.week7a.domain.usecases.GetAllTodosUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllTodosUseCase: GetAllTodosUseCase
+    private val getAllTodosUseCase: GetAllTodosUseCase,
+    private val deleteTodoUseCase: DeleteTodoUseCase
 ) : ViewModel() {
     companion object {
         private const val TAG = "HomeViewModel"
@@ -49,6 +52,27 @@ class HomeViewModel @Inject constructor(
                         todos = result.data,
                         detail = HomeState.Detail.Success
                     )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun deleteTodo(todo: Todo) {
+        deleteTodoUseCase(todo).onEach { result ->
+            when (result) {
+                is Resource.Loading -> _uiState.update {
+                    it.copy(detail = HomeState.Detail.Loading)
+                }
+
+                is Resource.Success -> {
+                    getAllTodos()
+                    _uiState.update {
+                        it.copy(detail = HomeState.Detail.Success)
+                    }
+                }
+
+                is Resource.Error -> _uiState.update {
+                    it.copy(detail = HomeState.Detail.Error(result.message))
                 }
             }
         }.launchIn(viewModelScope)
