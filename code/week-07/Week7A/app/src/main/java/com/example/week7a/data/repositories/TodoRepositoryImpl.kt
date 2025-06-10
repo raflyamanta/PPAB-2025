@@ -1,14 +1,9 @@
 package com.example.week7a.data.repositories
 
-import android.R.attr.description
-import android.util.Log.d
-import android.util.Log.e
 import com.example.week7a.data.local.TodoDao
-import com.example.week7a.data.local.TodoEntity
-import com.example.week7a.data.remote.requests.CreateTodoRequest
-import com.example.week7a.data.remote.retrofit.TodoApi
-import com.example.week7a.domain.models.Todo
+import com.example.week7a.domain.models.TodoEntity
 import com.example.week7a.domain.repositories.TodoRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TodoRepositoryImpl @Inject constructor(
@@ -20,42 +15,24 @@ class TodoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun create(title: String, description: String?) {
-        val todo = TodoEntity(title = title, description = description, status = false)
-        todoDao.insertTodo(todo)
-    }
-
-    override suspend fun getAll(): List<Todo> {
-        return todoDao.getAllTodos().map {
-            Todo(
-                id = it.id.toString(),
-                title = it.title,
-                description = it.description,
-                status = it.status
-            )
-        }
-    }
-
-    override suspend fun delete(todo: Todo) {
-        val entity = TodoEntity(
-            id = todo.id.toInt(),
-            title = todo.title,
-            description = todo.description,
-            status = todo.status
+        val todo = TodoEntity(
+            title = title,
+            description = description,
+            status = false
         )
-        todoDao.deleteTodo(entity)
+        todoDao.create(todo)
     }
 
-    override suspend fun update(todo: Todo, newStatus: Boolean) {
-        val entity = TodoEntity(
-            id = todo.id.toInt(),
-            title = todo.title,
-            description = todo.description,
-            status = todo.status
-        )
+    override fun getAll(): Flow<List<TodoEntity>> =
+        todoDao.getAll()
 
-        entity.status = newStatus
-        todoDao.updateTodo(entity)
+    override suspend fun updateStatus(todo: TodoEntity, status: Boolean) {
+        todo.status = status
+        todoDao.update(todo)
     }
+
+    override suspend fun delete(todo: TodoEntity) =
+        todoDao.delete(todo)
 
 //    override suspend fun create(title: String, description: String?): String = try {
 //        val response = todoApi.create(CreateTodoRequest(title, description))

@@ -1,9 +1,9 @@
 package com.example.week7a.presentation.home
 
-import com.example.week7a.domain.models.Todo
+import com.example.week7a.domain.models.TodoEntity
 
 data class HomeState(
-    val todos: List<Todo> = emptyList(),
+    val todos: List<TodoEntity> = emptyList(),
     val detail: Detail = Detail.Initial,
 ) {
     interface Detail {

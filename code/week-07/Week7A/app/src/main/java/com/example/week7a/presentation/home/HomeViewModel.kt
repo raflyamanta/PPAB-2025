@@ -1,10 +1,9 @@
 package com.example.week7a.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.week7a.commons.Resource
-import com.example.week7a.domain.models.Todo
+import com.example.week7a.domain.models.TodoEntity
 import com.example.week7a.domain.usecases.DeleteTodoUseCase
 import com.example.week7a.domain.usecases.GetAllTodosUseCase
 import com.example.week7a.domain.usecases.UpdateTodoUseCase
@@ -35,43 +34,25 @@ class HomeViewModel @Inject constructor(
 
     fun getAllTodos() {
         getAllTodosUseCase().onEach { result ->
-            Log.d(TAG, result.toString())
-            when (result) {
-                is Resource.Error -> _uiState.update {
-                    it.copy(
-                        detail = HomeState.Detail.Error(
-                            result.message
-                        )
-                    )
-                }
-
-                is Resource.Loading -> _uiState.update {
-                    it.copy(detail = HomeState.Detail.Loading)
-                }
-
-                is Resource.Success -> _uiState.update {
-                    it.copy(
-                        todos = result.data,
-                        detail = HomeState.Detail.Success
-                    )
-                }
+//            _uiState.update { it.copy(detail = HomeState.Detail.Loading) }
+//            Log.d(TAG, "getAllTodos: $result")
+            _uiState.update {
+                it.copy(
+                    detail = HomeState.Detail.Success,
+                    todos = result
+                )
             }
         }.launchIn(viewModelScope)
     }
 
-    fun deleteTodo(todo: Todo) {
+    fun deleteTodo(todo: TodoEntity) {
         deleteTodoUseCase(todo).onEach { result ->
             when (result) {
                 is Resource.Loading -> _uiState.update {
                     it.copy(detail = HomeState.Detail.Loading)
                 }
 
-                is Resource.Success -> {
-                    getAllTodos()
-                    _uiState.update {
-                        it.copy(detail = HomeState.Detail.Success)
-                    }
-                }
+                is Resource.Success -> Unit
 
                 is Resource.Error -> _uiState.update {
                     it.copy(detail = HomeState.Detail.Error(result.message))
@@ -80,16 +61,17 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun updateTodo(todo: Todo, newStatus: Boolean) {
-        updateTodoUseCase(todo, newStatus).onEach { result ->
+    fun updateTodo(todo: TodoEntity, status: Boolean) {
+        updateTodoUseCase(todo, status).onEach { result ->
             when (result) {
-                is Resource.Success -> getAllTodos()
-                is Resource.Error -> _uiState.update {
-                    it.copy(detail = HomeState.Detail.Error(result.message))
-                }
-
                 is Resource.Loading -> _uiState.update {
                     it.copy(detail = HomeState.Detail.Loading)
+                }
+
+                is Resource.Success -> Unit
+
+                is Resource.Error -> _uiState.update {
+                    it.copy(detail = HomeState.Detail.Error(result.message))
                 }
             }
         }.launchIn(viewModelScope)

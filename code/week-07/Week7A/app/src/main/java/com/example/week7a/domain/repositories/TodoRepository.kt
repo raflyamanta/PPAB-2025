@@ -1,6 +1,7 @@
 package com.example.week7a.domain.repositories
 
-import com.example.week7a.domain.models.Todo
+import com.example.week7a.domain.models.TodoEntity
+import kotlinx.coroutines.flow.Flow
 
 interface TodoRepository {
     suspend fun create(
@@ -8,9 +9,12 @@ interface TodoRepository {
         description: String?,
     )
 
-    suspend fun getAll(): List<Todo>
+    fun getAll(): Flow<List<TodoEntity>>
 
-    suspend fun update(todo: Todo, newStatus: Boolean)
+    suspend fun updateStatus(
+        todo: TodoEntity,
+        status: Boolean
+    )
 
-    suspend fun delete(todo: Todo)
+    suspend fun delete(todo: TodoEntity)
 }

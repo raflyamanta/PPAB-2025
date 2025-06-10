@@ -1,4 +1,4 @@
-package com.example.week7a.data.local
+package com.example.week7a.domain.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "todo")
 data class TodoEntity(
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Int = 0,
