@@ -55,27 +55,6 @@ Demikian pula, tabel berikut menguraikan berbagai jenis pekerjaan.
 | Berjalan Lama | Satu kali atau berkala | WorkRequest apa pun atau Worker. Panggil setForeground() di Pekerja untuk menangani notifikasi. |
 | Dapat ditangguhkan | Satu kali atau berkala | PeriodicWorkRequest dan Worker. |
 
-
-
-#### Batasan pekerjaan
-Tentukan dengan jelas kondisi optimal untuk pekerjaan yang akan dijalankan menggunakan Batasan pekerjaan. Misalnya, jalankan hanya ketika perangkat berada di jaringan tidak berbayar, saat perangkat tidak ada aktivitas, atau saat baterai perangkat mencukupi.
-
-#### Penjadwalan yang andal
-WorkManager memungkinkan Anda menjadwalkan pekerjaan untuk menjalankan satu kali atau berulang kali menggunakan jendela penjadwalan fleksibel. Pekerjaan dapat diberi tag dan diberi nama, sehingga Anda dapat menjadwalkan pekerjaan yang unik dan dapat diganti, serta memantau atau membatalkan grup pekerjaan sekaligus.
-
-Pekerjaan terjadwal disimpan dalam database SQLite yang dikelola secara internal dan WorkManager memastikan bahwa pekerjaan ini tetap ada dan dijadwalkan ulang di seluruh reboot perangkat.
-
-Selain itu, WorkManager mematuhi fitur penghemat daya dan praktik terbaik seperti mode Istirahatkan, sehingga Anda tidak perlu mengkhawatirkannya.
-
-#### Tugas yang diprioritaskan
-Anda dapat menggunakan WorkManager untuk menjadwalkan pekerjaan langsung untuk eksekusi di latar belakang. Anda harus menggunakan Tugas yang diprioritaskan untuk tugas yang penting bagi pengguna dan yang selesai dalam beberapa menit.
-
-#### Kebijakan percobaan ulang fleksibel
-Terkadang pekerjaan gagal. WorkManager menawarkan kebijakan percobaan ulang fleksibel, termasuk kebijakan backoff eksponensial yang dapat dikonfigurasi.
-
-#### Perantaian pekerjaan
-Untuk pekerjaan terkait yang kompleks, ikat semua pekerjaan individu menggunakan antarmuka intuitif yang memungkinkan Anda mengontrol bagian mana yang berjalan secara berurutan dan yang berjalan secara paralel.
-
 ```kotlin
 val continuation = WorkManager.getInstance(context)
     .beginUniqueWork(
