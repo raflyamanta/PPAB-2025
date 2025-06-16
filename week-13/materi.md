@@ -4,10 +4,17 @@ Pekerjaan akan bersifat persisten jika tetap dijadwalkan melalui proses mulai ul
 
 ### Apa itu Work Manager ?
 WorkManager adalah pustaka (library) Android yang menjalankan pekerjaan latar belakang yang dapat ditunda ketika kondisi atau batasan (constraints) pekerjaan tersebut telah terpenuhi.
-
 WorkManager ditujukan untuk tugas-tugas yang memerlukan jaminan akan dijalankan oleh sistem, bahkan jika aplikasi telah keluar atau ditutup.
-
 Dengan kata lain, WorkManager menyediakan API yang hemat baterai yang merangkum evolusi panjang pembatasan perilaku tugas latar belakang di Android. Ini sangat penting bagi aplikasi Android yang perlu menjalankan tugas di latar belakang secara andal.
+
+### Kapan Menggunakan Work Manager ?
+WorkManager digunakan untuk menangani pekerjaan latar belakang yang perlu dijalankan ketika berbagai kondisi telah terpenuhi, terlepas dari apakah proses aplikasi sedang berjalan atau tidak. Pekerjaan latar belakang dapat dimulai saat aplikasi berada di latar belakang, saat aplikasi sedang dibuka (foreground), atau saat aplikasi awalnya di foreground lalu berpindah ke background. Apapun status aplikasi, pekerjaan latar belakang tersebut harus tetap berjalan, atau dijalankan ulang jika proses aplikasi dihentikan oleh Android.
+
+Salah satu kesalahpahaman umum tentang WorkManager adalah bahwa ia digunakan untuk tugas yang cukup dijalankan di “thread latar belakang” namun tidak perlu bertahan saat proses mati. Ini tidak benar. Untuk kasus seperti itu, ada solusi lain yang lebih tepat, seperti coroutines di Kotlin, ThreadPool, atau pustaka seperti RxJava. Kamu bisa menemukan lebih banyak informasi tentang kasus ini di panduan pemrosesan latar belakang Android.
+
+Ada banyak situasi berbeda di mana kamu perlu menjalankan pekerjaan latar belakang, dan oleh karena itu juga ada solusi berbeda. WorkManager cocok digunakan saat pekerjaan latar belakangmu harus dijalankan secara andal meskipun proses aplikasi dihentikan atau perangkat di-restart.
+
+Berikut gambar diagram yang menunjukkan kapan sebaiknya menggunakan WorkManager:
 
 ### Jenis pekerjaan persisten
 WorkManager menangani tiga jenis pekerjaan persisten:
@@ -27,8 +34,7 @@ Demikian pula, tabel berikut menguraikan berbagai jenis pekerjaan.
 | Berjalan Lama | Satu kali atau berkala | WorkRequest apa pun atau Worker. Panggil setForeground() di Pekerja untuk menangani notifikasi. |
 | Dapat ditangguhkan | Satu kali atau berkala | PeriodicWorkRequest dan Worker. |
 
-### Fitur WorkManager
-Selain menyediakan API yang lebih sederhana dan konsisten, WorkManager memiliki sejumlah manfaat utama lainnya:
+
 
 #### Batasan pekerjaan
 Tentukan dengan jelas kondisi optimal untuk pekerjaan yang akan dijalankan menggunakan Batasan pekerjaan. Misalnya, jalankan hanya ketika perangkat berada di jaringan tidak berbayar, saat perangkat tidak ada aktivitas, atau saat baterai perangkat mencukupi.
