@@ -2,6 +2,13 @@
 
 Pekerjaan akan bersifat persisten jika tetap dijadwalkan melalui proses mulai ulang aplikasi dan sistem memulai ulang komputer. WorkManager adalah solusi yang direkomendasikan untuk pekerjaan persisten. Karena sebagian besar pemrosesan latar belakang paling baik dilakukan melalui kerja persisten, Oleh karena itu, WorkManager juga merupakan API utama yang direkomendasikan untuk latar belakang diproses secara umum.
 
+### Apa itu Work Manager ?
+WorkManager adalah pustaka (library) Android yang menjalankan pekerjaan latar belakang yang dapat ditunda ketika kondisi atau batasan (constraints) pekerjaan tersebut telah terpenuhi.
+
+WorkManager ditujukan untuk tugas-tugas yang memerlukan jaminan akan dijalankan oleh sistem, bahkan jika aplikasi telah keluar atau ditutup.
+
+Dengan kata lain, WorkManager menyediakan API yang hemat baterai yang merangkum evolusi panjang pembatasan perilaku tugas latar belakang di Android. Ini sangat penting bagi aplikasi Android yang perlu menjalankan tugas di latar belakang secara andal.
+
 ### Jenis pekerjaan persisten
 WorkManager menangani tiga jenis pekerjaan persisten:
 
