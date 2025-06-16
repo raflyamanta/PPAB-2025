@@ -15,6 +15,31 @@ Salah satu kesalahpahaman umum tentang WorkManager adalah bahwa ia digunakan unt
 Ada banyak situasi berbeda di mana kamu perlu menjalankan pekerjaan latar belakang, dan oleh karena itu juga ada solusi berbeda. WorkManager cocok digunakan saat pekerjaan latar belakangmu harus dijalankan secara andal meskipun proses aplikasi dihentikan atau perangkat di-restart.
 
 Berikut gambar diagram yang menunjukkan kapan sebaiknya menggunakan WorkManager:
+![Why](img/kapan.png)
+
+Dalam kasus penggunaan WorkManager, ia paling cocok digunakan untuk pekerjaan latar belakang yang harus diselesaikan dan dapat ditunda (deferrable).
+
+Bisa kita rujuk pada beberapa pertanyaan berikut :
+
+#### Apakah tugas ini harus diselesaikan?
+Jika aplikasi ditutup oleh pengguna, apakah tugas ini masih perlu diselesaikan?
+
+Contohnya adalah aplikasi pencatat (note-taking) yang melakukan sinkronisasi dengan server jarak jauh. Setelah kamu selesai menulis catatan, kamu tentu mengharapkan aplikasi akan menyinkronkan catatan tersebut dengan server backend. Ini harus tetap terjadi meskipun kamu beralih ke aplikasi lain, atau sistem operasi menutup aplikasi untuk menghemat memori. Sinkronisasi itu juga harus tetap berjalan meskipun perangkat di-restart. Nah, WorkManager menjamin bahwa tugas seperti ini akan diselesaikan.
+
+#### Apakah tugas ini bisa ditunda?
+Apakah tugas ini bisa dijalankan nanti, atau hanya berguna jika dijalankan segera?
+
+Kalau tugasnya masih bisa berguna meski dijalankan nanti, berarti ia deferrable. Mengacu pada contoh sebelumnya, akan lebih baik jika catatan disinkronkan langsung, tetapi kalau hal itu tidak memungkinkan dan sinkronisasi terjadi beberapa saat kemudian, itu bukan masalah besar. WorkManager menghormati batasan-batasan sistem operasi terkait pekerjaan latar belakang, dan akan mencoba menjalankan tugasmu dengan cara yang hemat baterai.
+
+### Mengapa Menggunakan WorkManager?
+WorkManager menjalankan pekerjaan latar belakang sambil menangani berbagai masalah kompatibilitas serta mengikuti praktik terbaik terkait konsumsi baterai dan kesehatan sistem — semuanya untukmu.
+
+Selain itu, dengan WorkManager kamu bisa menjadwalkan:
+- Tugas periodik, dan
+- Rangkaian tugas yang kompleks dan saling bergantung.
+
+Pekerjaan latar belakang bisa dieksekusi secara paralel maupun berurutan, di mana kamu dapat menentukan urutan eksekusinya. WorkManager secara otomatis menangani pengiriman input dan output antar tugas.
+
 
 ### Jenis pekerjaan persisten
 WorkManager menangani tiga jenis pekerjaan persisten:
