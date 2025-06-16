@@ -22,13 +22,9 @@ Dalam kasus penggunaan WorkManager, ia paling cocok digunakan untuk pekerjaan la
 Bisa kita rujuk pada beberapa pertanyaan berikut :
 
 #### Apakah tugas ini harus diselesaikan?
-Jika aplikasi ditutup oleh pengguna, apakah tugas ini masih perlu diselesaikan?
-
 Contohnya adalah aplikasi pencatat (note-taking) yang melakukan sinkronisasi dengan server jarak jauh. Setelah kamu selesai menulis catatan, kamu tentu mengharapkan aplikasi akan menyinkronkan catatan tersebut dengan server backend. Ini harus tetap terjadi meskipun kamu beralih ke aplikasi lain, atau sistem operasi menutup aplikasi untuk menghemat memori. Sinkronisasi itu juga harus tetap berjalan meskipun perangkat di-restart. Nah, WorkManager menjamin bahwa tugas seperti ini akan diselesaikan.
 
 #### Apakah tugas ini bisa ditunda?
-Apakah tugas ini bisa dijalankan nanti, atau hanya berguna jika dijalankan segera?
-
 Kalau tugasnya masih bisa berguna meski dijalankan nanti, berarti ia deferrable. Mengacu pada contoh sebelumnya, akan lebih baik jika catatan disinkronkan langsung, tetapi kalau hal itu tidak memungkinkan dan sinkronisasi terjadi beberapa saat kemudian, itu bukan masalah besar. WorkManager menghormati batasan-batasan sistem operasi terkait pekerjaan latar belakang, dan akan mencoba menjalankan tugasmu dengan cara yang hemat baterai.
 
 ### Mengapa Menggunakan WorkManager?
