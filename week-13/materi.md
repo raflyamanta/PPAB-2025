@@ -55,37 +55,6 @@ Demikian pula, tabel berikut menguraikan berbagai jenis pekerjaan.
 | Berjalan Lama | Satu kali atau berkala | WorkRequest apa pun atau Worker. Panggil setForeground() di Pekerja untuk menangani notifikasi. |
 | Dapat ditangguhkan | Satu kali atau berkala | PeriodicWorkRequest dan Worker. |
 
-```kotlin
-val continuation = WorkManager.getInstance(context)
-    .beginUniqueWork(
-        Constants.IMAGE_MANIPULATION_WORK_NAME,
-        ExistingWorkPolicy.REPLACE,
-        OneTimeWorkRequest.from(CleanupWorker::class.java)
-    ).then(OneTimeWorkRequest.from(WaterColorFilterWorker::class.java))
-    .then(OneTimeWorkRequest.from(GrayScaleFilterWorker::class.java))
-    .then(OneTimeWorkRequest.from(BlurEffectFilterWorker::class.java))
-    .then(
-        if (save) {
-            workRequest<SaveImageToGalleryWorker>(tag = Constants.TAG_OUTPUT)
-        } else /* upload */ {
-            workRequest<UploadWorker>(tag = Constants.TAG_OUTPUT)
-        }
-    )
-
-```
-
-Untuk setiap tugas kerja, Anda dapat menentukan data input dan output untuk tugas tersebut. Saat merantai pekerjaan bersama, WorkManager secara otomatis meneruskan data output dari satu tugas kerja ke tugas berikutnya.
-
-#### Interoperabilitas threading bawaan
-WorkManager terintegrasi dengan lancar dengan Coroutine dan RxJava dan memberikan fleksibilitas untuk melakukan plugin API asinkron Anda sendiri.
-
-### Menggunakan WorkManager untuk pekerjaan yang andal
-WorkManager dimaksudkan untuk pekerjaan yang perlu berjalan secara andal meskipun pengguna mematikan layar, aplikasi keluar, atau perangkat dimulai ulang. Contoh:
-
-Mengirim log atau analisis ke layanan backend.
-Menyinkronkan data aplikasi dengan server secara berkala.
-WorkManager tidak dimaksudkan untuk pekerjaan latar belakang dalam proses yang dapat dihentikan dengan aman jika proses aplikasi berhenti. Solusi ini juga bukan solusi umum untuk semua pekerjaan yang memerlukan eksekusi langsung. Tinjau panduan pemrosesan di latar belakang untuk menemukan solusi mana yang sesuai dengan kebutuhan Anda.
-
 ### Hubungan dengan API lainnya
 Meskipun coroutine adalah solusi yang direkomendasikan untuk kasus penggunaan tertentu, Anda tidak boleh menggunakannya untuk pekerjaan persisten. Penting untuk diperhatikan bahwa coroutine adalah framework konkurensi, sedangkan WorkManager adalah library untuk Anda. Anda juga harus menggunakan AlarmManager untuk jam atau kalender saja.
 
