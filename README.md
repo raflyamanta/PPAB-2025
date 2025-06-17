@@ -7,14 +7,14 @@
 3. [Pengenalan Android Studio, Jetpack Compose, dan Intent](./week-03/materi.md)  
 4. [Basic UI Compose](./week-04/materi.md)  
 5. [Layouting dan Styling](./week-05/materi.md)  
-6. [LazyColumn dan Composable](./week-06/materi.md)
-7. [Compose Navigation dan View Models](./week-07/materi.md)
-8. Responsi 1
-9. [Dependency Injection dan App Architecture](./week-09/materi.md)
-10. [HTTP Request](./week-10/materi.md)
-11. [Data Persistence 1](./week-11/materi.md)
-12. Data Persistence 2
-13. Work Manager
+6. [LazyColumn dan Composable](./week-06/materi.md)  
+7. [Compose Navigation dan View Models](./week-07/materi.md)  
+8. Responsi 1  
+9. [Dependency Injection dan App Architecture](./week-09/materi.md)  
+10. [HTTP Request](./week-10/materi.md)  
+11. [Data Persistence 1](./week-11/materi.md)  
+12. [Data Persistence 2](./week-12/materi.md)  
+13. [Work Manager](./week-13/materi.md)  
 14. Responsi 2
 
 ### Kontrak Praktikum
